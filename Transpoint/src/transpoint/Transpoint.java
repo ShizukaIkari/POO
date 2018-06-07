@@ -5,6 +5,8 @@
  */
 package transpoint;
 
+import modelo.usuario.PessoaFisica;
+
 /**
  *
  * @author 20161bsi0403
