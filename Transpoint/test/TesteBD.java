@@ -37,7 +37,7 @@ public class TesteBD {
     public void tearDown() {
     }
 
-    @Test
+    //@Test  TÁ COMENTADO MAS SE PRECISAR RODAR SÓ TIRAR
     public void testCriaTabelaCartao(){
         System.out.println("criarTabelaCartao");
         PersistenciaCartao instance = new PersistenciaCartao();

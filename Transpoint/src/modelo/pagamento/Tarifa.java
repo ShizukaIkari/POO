@@ -5,10 +5,17 @@
  */
 package modelo.pagamento;
 
+import java.util.Date;
+import modelo.cartao.Cartao;
+
 /**
  *
- * @author Salzman
+ * 
  */
 public class Tarifa {
+    public int linha;
+    public Date data;
+    public double valor;
+    public Cartao cartaoUtilizado;
     
 }
