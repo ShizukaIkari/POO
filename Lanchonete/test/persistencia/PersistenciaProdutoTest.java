@@ -5,6 +5,7 @@
  */
 package persistencia;
 
+import persistenciaFILE.PersistenciaProduto;
 import java.util.ArrayList;
 import lanchonete.Hamburguer;
 import lanchonete.Produto;
