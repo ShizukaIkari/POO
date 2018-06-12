@@ -23,10 +23,9 @@ public class Cartao {
 
     public void setSaldo(double saldo) {
         if (saldo>=0) this.saldo = saldo;
-        else System.out.println("saldo invalido");
+        else System.out.println("Saldo inválido");
     }
     
-    // Aqui n devia estar lidando com isso?
     public Cartao(String descricao){
                 
             ArrayList linhasCadastradas = new ArrayList();
