@@ -13,9 +13,14 @@ import modelo.cartao.Cartao;
  * @author 20161bsi0403
  */
 public class Usuario {
-    private Pessoa pessoa;
+    private int cpf;
+    private String senha;
     private ArrayList<Cartao> cartoesTranscol;
     
+    
+    public Usuario(Pessoa p){
+        this.cpf = p.getCpf();
+    }
     //Vai verificar no BD cartões relacionados à pessoa usuária e adicionar na lista
     public void addCartao(Cartao card){
         cartoesTranscol.add(card);
@@ -44,10 +49,5 @@ public class Usuario {
             i++;
         }
     }
-    
-    public Pessoa getPessoa(){
-        return this.pessoa;
-    }
-    
-    
+        
 }

@@ -5,7 +5,8 @@
  */
 package transpoint;
 
-import modelo.usuario.PessoaFisica;
+import modelo.usuario.Pessoa;
+
 
 /**
  *
@@ -18,10 +19,7 @@ public class Transpoint {
      */
     public static void main(String[] args) {
         
-        PessoaFisica pf = new PessoaFisica();
-        
-        pf.setNome("teste");
-        // TODO code application logic here
+       /*Aqui terá a interface geral que chamará as outras interfaces*/
     }
     
 }

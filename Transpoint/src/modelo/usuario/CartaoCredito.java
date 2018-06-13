@@ -5,8 +5,6 @@
  */
 package modelo.usuario;
 
-import modelo.usuario.PessoaFisica;
-
 /**
  *
  * @author Salzman
@@ -14,7 +12,7 @@ import modelo.usuario.PessoaFisica;
 public class CartaoCredito {
     private int numero;
     private String dataVencimento;
-    private PessoaFisica titular;
+    private Pessoa titular;
 
     public void setNumero(int numero) {
         this.numero = numero;
@@ -24,7 +22,7 @@ public class CartaoCredito {
         this.dataVencimento = dataVencimento;
     }
 
-    public void setTitular(PessoaFisica titular) {
+    public void setTitular(Pessoa titular) {
         this.titular.nome = titular.getNome();
     }
 

@@ -22,7 +22,9 @@ public class Recarga {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(double valor) throws Exception {
+        
+        if (valor<0) throw new Exception("Valor não pode ser menor a zero.");
         this.valor = valor;
     }
 

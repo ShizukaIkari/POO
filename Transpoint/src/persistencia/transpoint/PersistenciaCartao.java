@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import modelo.cartao.Cartao;
 import modelo.usuario.Pessoa;
+import modelo.usuario.Usuario;
 
 /**
  *
@@ -57,7 +58,7 @@ public class PersistenciaCartao {
     }
     
     //Retorna uma lista com todos os cartões disponíveis associados ao usuário
-    public ArrayList recuperaCartoesPessoa(Pessoa p){
+    public ArrayList recuperaCartoesPessoa(Usuario u){
         ArrayList<Cartao> allCards = new ArrayList<>();
         String sql ="SELECT * FROM cartao WHERE ";
         Connection connection = null;

@@ -5,6 +5,11 @@
  */
 package visao;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import modelo.pagamento.Recarga;
+
 /**
  *
  * @author Serenna
@@ -60,6 +65,11 @@ public class UIRecarga extends javax.swing.JFrame {
         });
 
         confirmButton.setText("OK");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButtonActionPerformed(evt);
+            }
+        });
 
         cancelButton.setText("Cancelar");
 
@@ -111,6 +121,23 @@ public class UIRecarga extends javax.swing.JFrame {
     private void valorRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valorRecargaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_valorRecargaActionPerformed
+
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        // TODO add your handling code here:
+        
+        Recarga nRecarga = new Recarga();
+        
+        try {
+            nRecarga.setValor(Double.parseDouble(valorRecarga.getText()));
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return;
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_confirmButtonActionPerformed
 
     /**
      * @param args the command line arguments
