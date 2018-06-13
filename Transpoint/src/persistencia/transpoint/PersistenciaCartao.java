@@ -9,6 +9,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import modelo.cartao.Cartao;
+import modelo.usuario.Pessoa;
 
 /**
  *
@@ -20,6 +23,7 @@ public class PersistenciaCartao {
         String sql = "CREATE TABLE cartao"+
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "codigo INTEGER NOT NULL,"
+                + ","
                 + "categoria CHAR(60) NOT NULL,"
                 + "saldo NUMERIC NOT NULL,"
                 + "disponivel BOOLEAN)";     
@@ -51,4 +55,16 @@ public class PersistenciaCartao {
                 ex.printStackTrace();
         }
     }
+    
+    //Retorna uma lista com todos os cartões disponíveis associados ao usuário
+    public ArrayList recuperaCartoesPessoa(Pessoa p){
+        ArrayList<Cartao> allCards = new ArrayList<>();
+        String sql ="SELECT * FROM cartao WHERE ";
+        Connection connection = null;
+        Statement stament = null;
+        
+        return allCards;
+    }
+    
+    
 }
