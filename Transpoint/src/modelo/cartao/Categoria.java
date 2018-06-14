@@ -27,7 +27,7 @@ public class Categoria {
     private ArrayList<String> linhasCadastradas = null;
     private double desconto = 0;  
     
-    public Categoria(String descricao, ArrayList linhas){
+    public Categoria(String descricao){
         //Verifica se a descriçao condiz com alguma das categorias gratuitas
         if((descricao.equalsIgnoreCase("Idoso")) || (descricao.equalsIgnoreCase("PasseLivre")) || (descricao.equalsIgnoreCase("Servico")) ||(descricao.equalsIgnoreCase("EstudanteGratuito"))){
             setGratuita(true);      

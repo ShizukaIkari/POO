@@ -12,10 +12,39 @@ import java.util.ArrayList;
  * @author Salzman
  */
 public class Cartao {
-    public Categoria categoria;
-    public int codigo;
-    public boolean disponivel;
+    private Categoria categoria;
+    private int codigo;
+    private boolean disponivel;
     private double saldo;
+    private int idUser;
+
+    public int getIdUser() {
+        return idUser;
+    }
+    
+    
+    
+    
+    
+    public Cartao(String descricao){
+                
+           
+            
+            Categoria category = new Categoria(descricao);
+            this.categoria = category;
+
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+  
+    
 
     public double getSaldo() {
         return saldo;
@@ -26,16 +55,6 @@ public class Cartao {
         else System.out.println("Saldo inválido");
     }
     
-    public Cartao(String descricao){
-                
-            ArrayList linhasCadastradas = new ArrayList();
-            linhasCadastradas = null;  //tratar a passagem da lista por parametro
-            
-            Categoria category = new Categoria(descricao,linhasCadastradas);
-            this.categoria = category;
-
-    }
-
     public String getCategoria(Cartao card) {
         return card.categoria.getTipo();
     }

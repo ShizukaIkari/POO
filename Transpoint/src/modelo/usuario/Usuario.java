@@ -12,18 +12,23 @@ import modelo.cartao.Cartao;
  *
  * @author 20161bsi0403
  */
-public class Usuario {
-    private int cpf;
+public class Usuario extends Pessoa {
+    private int idUser;
     private String senha;
     private ArrayList<Cartao> cartoesTranscol;
     
     
-    public Usuario(Pessoa p){
-        this.cpf = p.getCpf();
-    }
     //Vai verificar no BD cartões relacionados à pessoa usuária e adicionar na lista
     public void addCartao(Cartao card){
         cartoesTranscol.add(card);
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
     
     /*
@@ -45,7 +50,7 @@ public class Usuario {
     public void listarCartoes(ArrayList<Cartao> cards){
         int i=1;
         for(Cartao card : cards){
-            System.out.println(i + " - " + card.categoria.getTipo() + ";");
+            System.out.println(i + " - " + card.getCategoria().getTipo() + ";");
             i++;
         }
     }

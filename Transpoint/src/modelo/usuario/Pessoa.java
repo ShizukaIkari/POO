@@ -12,7 +12,7 @@ import modelo.cartao.Cartao;
  *
  * @author Salzman
  */
-public class Pessoa {
+public abstract class Pessoa {
     public String nome;
     public Endereco endereco;
     public String telefone;
