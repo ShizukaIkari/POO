@@ -21,23 +21,16 @@ import java.util.ArrayList;
  */
 public class Categoria {         
     public boolean limiteDiario ;        //Se possui ou não
-    public int qtdDiaria;  // SE classe possui limite diário, qual é o numero?  R:6,2
+    public int qtdDiaria;  // Se possui, qual a quantidade
     public String tipo; //Vale transporte, Passe Facil, idoso... etc
     private boolean gratuita;
-    private ArrayList<String> linhasCadastradas = null;
-    private double desconto = 0;  
+    private double desconto = 1;  // ValorPassagem * 1 == ValorPassagem;
     
     public Categoria(String descricao){
         //Verifica se a descriçao condiz com alguma das categorias gratuitas
-        if((descricao.equalsIgnoreCase("Idoso")) || (descricao.equalsIgnoreCase("PasseLivre")) || (descricao.equalsIgnoreCase("Servico")) ||(descricao.equalsIgnoreCase("EstudanteGratuito"))){
+        if((descricao.equalsIgnoreCase("Idoso")) || (descricao.equalsIgnoreCase("PasseLivre")) || (descricao.equalsIgnoreCase("Servico"))){
             setGratuita(true);      
-            if((descricao.equalsIgnoreCase("EstudanteGratuito"))){  //Particularidade da classe: limitediario (2)
-                setLimiteDiario(true);
-                setQtdDiaria(2);
-            }
-            else{
-                setLimiteDiario(false);     //As outras classes gratuitas não tem limite diário
-            }
+            setLimiteDiario(false);
         }
         else{
             setGratuita(false);     //Se a classe não é grauita, ela é paga
@@ -50,8 +43,7 @@ public class Categoria {
                 this.desconto = 0.5;
             }
         }
-        setTipo(descricao);             /*ATENÇÃO Não fazemos tratamento de erros no caso "descrição inválida"*/
-        
+        setTipo(descricao);       /*ATENÇÃO Não fizemos tratamento de erros no caso "descrição inválida"*/
     }
 
     public void setLimiteDiario(boolean limiteDiario) {
@@ -59,7 +51,6 @@ public class Categoria {
     }
     public void setQtdDiaria(int l){
         if (this.limiteDiario) this.qtdDiaria = l;
-        else System.out.println("Operação ilegal. Categoria não tem limite diário"); // Não precisa disso mas talvez precisemos tentar
     }
     
     public int getQtdDiaria() {
@@ -84,22 +75,6 @@ public class Categoria {
 
     public void setGratuita(boolean gratuito) {
         this.gratuita = gratuito;
-        if(!this.gratuita){          //Supõe-se :
-            setLimiteDiario(true);
-        }
     }
-    
-    public ArrayList<String> getLinhasCadastradas() { //FALTA TRATAR AS LINHAS QUE SERAO PASSADAS COMO PARAMETRO EM CARTAO
-        
-        if(this.gratuita)   return linhasCadastradas;
-        else {
-            System.out.println("Erro, estudante não gratuito não possui linhas cadastradas"); //desnecessário
-            return null;
-        }
-    }
-
-    public void setLinhasCadastradas(ArrayList<String> linhasCadastradas) {
-        if (this.gratuita) this.linhasCadastradas = linhasCadastradas;
-        else System.out.println("Erro, estudante não gratuito"); // Melhorar isso aqui HEUEHE(tratamento de erros necessario?)
-    }
+ 
 }

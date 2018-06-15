@@ -5,6 +5,7 @@
  */
 package modelo.pagamento;
 
+import java.text.DateFormat;
 import modelo.cartao.Cartao;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -15,25 +16,34 @@ import javax.swing.JOptionPane;
  */
 public class Recarga {
     private double valor; //quantia desejada para incrementar saldo do cartão
-    private Date dataRecarga;
+    private String dataHoraRecarga; //Salvando hora e data da recarga
     private String formaPagamento;
-
+    
+    /*public Recarga(Cartao c) throws Exception{
+        if((c.getCategoria().isGratuita())){
+            throw new Exception("Categorias gratuitas não recebem recarga.");
+        } else{
+            setDataRecarga();
+        }
+    }*/ 
+    
     public double getValor() {
         return valor;
     }
 
     public void setValor(double valor) throws Exception {
-        
         if (valor<0) throw new Exception("Valor não pode ser menor a zero.");
         this.valor = valor;
     }
 
-    public Date getDataRecarga() {
-        return dataRecarga;
+    public String getDataRecarga() {
+        return dataHoraRecarga;
     }
 
-    public void setDataRecarga(Date dataRecarga) {
-        this.dataRecarga = dataRecarga;
+    public void setDataRecarga() {
+        Date hoje = new Date();
+        DateFormat dtHora = DateFormat.getDateTimeInstance();
+        this.dataHoraRecarga = dtHora.format(hoje);
     }
 
     public String getFormaPagamento() {
@@ -42,26 +52,5 @@ public class Recarga {
 
     public void setFormaPagamento(String formaPagamento) {
         this.formaPagamento = formaPagamento;
-    }
-    //Seria tipo o construtor
-    public void executarRecarga(Cartao c, double valor, String pagamento){  //Criar interface para tal
-        
-        //Verificar se cartão, verificar se valor válido, verificar se pagamento válido
-        if ( valor > 0){
-            if (pagamento.equalsIgnoreCase("Cartao de Credito") ){
-                //pegar informações dele e validar? what should I do
-                this.formaPagamento = "Cartao de Credito"; 
-                this.valor = valor;
-                c.setSaldo(c.getSaldo()+valor);
-                this.dataRecarga = new Date();
-            }
-            else if (pagamento.equalsIgnoreCase("Boleto")) {
-                //Validação?
-                this.formaPagamento = "Boleto"; 
-                this.valor = valor;
-                c.setSaldo(c.getSaldo()+valor);
-                this.dataRecarga = new Date();
-            } else JOptionPane.showMessageDialog(null, "Método de pagamento inválido, selecione Cartão ou Boleto");
-        } else JOptionPane.showMessageDialog(null, "Valor inválido, selecione uma quantia válida");
     }
 }

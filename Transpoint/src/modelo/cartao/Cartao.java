@@ -5,12 +5,6 @@
  */
 package modelo.cartao;
 
-import java.util.ArrayList;
-
-/**
- *
- * @author Salzman
- */
 public class Cartao {
     private Categoria categoria;
     private int codigo;
@@ -20,19 +14,15 @@ public class Cartao {
 
     public int getIdUser() {
         return idUser;
-    }
+    }    
     
-    
-    
-    
-    
-    public Cartao(String descricao){
-                
-           
-            
-            Categoria category = new Categoria(descricao);
-            this.categoria = category;
-
+    public Cartao(int codigo, boolean disponivel, double saldo, String descricao, int idUser){
+        Categoria category = new Categoria(descricao);
+        this.categoria = category;
+        this.codigo = codigo;
+        this.disponivel = disponivel;
+        this.saldo = saldo;
+        this.idUser = idUser;
     }
 
     public void setIdUser(int idUser) {
@@ -43,16 +33,15 @@ public class Cartao {
         return categoria;
     }
 
-  
-    
-
     public double getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(double saldo) {
-        if (saldo>=0) this.saldo = saldo;
-        else System.out.println("Saldo inválido");
+    //Saldo vai ser descontado de tarifa (passar valor negativo) ou recarregado por recarga.
+    public void setSaldo(double valor) throws Exception {
+        if(this.saldo + valor > 0){
+            this.saldo += valor;
+        } else throw new Exception("Saldo insuficiente.");
     }
     
     public String getCategoria(Cartao card) {

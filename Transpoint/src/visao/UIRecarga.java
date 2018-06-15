@@ -5,8 +5,6 @@
  */
 package visao;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.pagamento.Recarga;
 
@@ -37,9 +35,9 @@ public class UIRecarga extends javax.swing.JFrame {
         opCartaoCredito = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         txtValor = new javax.swing.JLabel();
-        valorRecarga = new javax.swing.JTextField();
         confirmButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        valorRecarga = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(600, 250));
@@ -58,12 +56,6 @@ public class UIRecarga extends javax.swing.JFrame {
         txtValor.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtValor.setText("Valor:");
 
-        valorRecarga.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                valorRecargaActionPerformed(evt);
-            }
-        });
-
         confirmButton.setText("OK");
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,6 +64,11 @@ public class UIRecarga extends javax.swing.JFrame {
         });
 
         cancelButton.setText("Cancelar");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,13 +77,14 @@ public class UIRecarga extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(opCartaoCredito)
                     .addComponent(opBoleto)
                     .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtValor)
-                        .addGap(18, 18, 18)
-                        .addComponent(valorRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(txtValor)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(valorRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(opCartaoCredito)))
                 .addContainerGap(42, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -118,14 +116,8 @@ public class UIRecarga extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void valorRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valorRecargaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_valorRecargaActionPerformed
-
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-        // TODO add your handling code here:
-        
-        Recarga nRecarga = new Recarga();
+        Recarga nRecarga = new Recarga(); //Como passar cartão selecionado para recarga?
         
         try {
             nRecarga.setValor(Double.parseDouble(valorRecarga.getText()));
@@ -133,11 +125,22 @@ public class UIRecarga extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             return;
         }
-        
+        nRecarga.setDataRecarga();
+        if(opBoleto.isSelected()){
+            nRecarga.setFormaPagamento("Boleto");
+            // ~ alguma função pra "gerar" um boleto fictício aqui? Dando a opção de imprimir
+        } else if (opCartaoCredito.isSelected()) {
+            nRecarga.setFormaPagamento("Cartão de Crédito");
+            // Abrir uma janela para cadastrar um novo cartão ou usar o já cadastrado?
+        }
         
         
         
     }//GEN-LAST:event_confirmButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**
      * @param args the command line arguments

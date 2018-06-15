@@ -20,7 +20,7 @@ public class Passagem {
     private int diaAtual;
     private static Date data = new Date();
     
-    public double getPassagem(){
+    public double getValorPassagem(){
         cal.setTime(data);
         diaAtual = cal.get(Calendar.DAY_OF_WEEK);
         if (diaAtual != 1){
