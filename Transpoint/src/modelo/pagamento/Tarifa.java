@@ -14,9 +14,20 @@ public class Tarifa {
     public int linha;
     public String data;
     public double valor;
-    public Cartao cartaoUtilizado;
+    public Cartao cartaoUtilizado;  //talvez não seja necessário 
     
-    public Tarifa(int linha, Passagem p, Cartao c){
+    public Tarifa(int linha, Passagem p, Cartao c) throws Exception{
+        setData();
+        this.linha = linha;
+        if (c.isDisponivel()){        //Cartão deve estar disponível para uso
+            valor = p.getValorPassagem() * c.getCategoria().getDesconto();
+            try{
+                c.setSaldo(-valor);
+            } catch (Exception e){
+                throw e;
+            }
+        }
+        
         
     }
 

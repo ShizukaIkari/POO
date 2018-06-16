@@ -12,21 +12,26 @@ public class Cartao {
     private double saldo;
     private int idUser;
 
-    public int getIdUser() {
-        return idUser;
-    }    
     
+  
     public Cartao(int codigo, boolean disponivel, double saldo, String descricao, int idUser){
-        Categoria category = new Categoria(descricao);
-        this.categoria = category;
+        this.categoria = new Categoria(descricao);
         this.codigo = codigo;
         this.disponivel = disponivel;
         this.saldo = saldo;
         this.idUser = idUser;
     }
+    
+    public Cartao(String categoria){
+        this.categoria = new Categoria(categoria);
+    }
 
     public void setIdUser(int idUser) {
         this.idUser = idUser;
+    }
+    
+    public int getIdUser() {
+        return idUser;
     }
 
     public Categoria getCategoria() {
@@ -41,18 +46,20 @@ public class Cartao {
     public void setSaldo(double valor) throws Exception {
         if(this.saldo + valor > 0){
             this.saldo += valor;
-        } else throw new Exception("Saldo insuficiente.");
+        } else {
+            throw new Exception("Saldo insuficiente.");
+        }
     }
     
-    public String getCategoria(Cartao card) {
-        return card.categoria.getTipo();
+    public String getTipoCategoria() {
+        return this.categoria.getTipo();
     }
 
-    public int getCodigo(Cartao card) {
+    public int getCodigo() {
         return codigo;
     }
 
-    public boolean isDisponivel(Cartao card) {
+    public boolean isDisponivel() {
         return disponivel;
     }
 

@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- *
+ *A classe passagem gerencia o valor da passagem, pois pode haver mudanças no preço
  *
  */
 public class Passagem {

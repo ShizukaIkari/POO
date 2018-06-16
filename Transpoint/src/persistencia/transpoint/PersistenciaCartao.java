@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.cartao.Cartao;
 import modelo.cartao.Categoria;
 import modelo.usuario.Pessoa;
@@ -73,8 +75,7 @@ public class PersistenciaCartao {
         try {
             //verifica se as classe da biblioteca existem
          Class.forName("org.sqlite.JDBC");
-         //abre a conexao com o  banco de dados chamado lanchonete.
-         //esse banco de dado é em arquivo
+         //abre a conexao com o  banco de dados
          connection  =DriverManager.getConnection("jdbc:sqlite:transpoint.db");
          System.out.println("Banco de dados aberto");   
          stament = connection.createStatement();
@@ -100,10 +101,22 @@ public class PersistenciaCartao {
         } catch (SQLException ex) {
                 ex.printStackTrace();
                 throw ex;
+        } catch (Exception ex) {
+            Logger.getLogger(PersistenciaCartao.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return allCards;
     }
     
+    public void salvaCartao(Cartao card){
+        String sql = "INSERT INTO cartao (codigo,idUser,categoria,saldo,disponivel)"
+        +"values ('" +
+        card.getCodigo()+","+
+        card.getIdUser()+","+
+        card.getTipoCategoria()+","+
+        card.getSaldo()+","+
+        card.isDisponivel()+")";
+        this.executeSQL(sql);
+    }
     
 }

@@ -31,6 +31,7 @@ public class Categoria {
         if((descricao.equalsIgnoreCase("Idoso")) || (descricao.equalsIgnoreCase("PasseLivre")) || (descricao.equalsIgnoreCase("Servico"))){
             setGratuita(true);      
             setLimiteDiario(false);
+            this.desconto = 0;
         }
         else{
             setGratuita(false);     //Se a classe não é grauita, ela é paga
@@ -44,6 +45,14 @@ public class Categoria {
             }
         }
         setTipo(descricao);       /*ATENÇÃO Não fizemos tratamento de erros no caso "descrição inválida"*/
+    }
+
+    public boolean isLimiteDiario() {
+        return limiteDiario;
+    }
+
+    public double getDesconto() {
+        return desconto;
     }
 
     public void setLimiteDiario(boolean limiteDiario) {
