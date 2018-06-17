@@ -7,11 +7,14 @@ package persistencia.transpoint;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.cartao.Cartao;
-import modelo.usuario.Pessoa;
+import modelo.usuario.Usuario;
 
 
 /**
@@ -24,8 +27,7 @@ public class PersistenciaUsuario {
         String sql = "CREATE TABLE usuario"+
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "cpf INTEGER NOT NULL,"
-                + "senha VARCHAR(60) NOT NULL,"
-                + "idcartao INTEGER NOT NULL";     
+                + "senha VARCHAR(60) NOT NULL";     
         this.executeSQL(sql);        
     }
 
@@ -53,10 +55,46 @@ public class PersistenciaUsuario {
                 ex.printStackTrace();
         }
     }
+    //Salva usuário no banco
+    public void salvaUsuario(Usuario u){
+        String sql = "INSERT INTO usuario (cpf,idUser,senha)"
+        +"values ('" +
+        u.getCpf()+","+
+        u.getIdUser()+","+
+        u.getSenha()+")";
+        this.executeSQL(sql);
+    }
     
-    
-    
-    
+    public Usuario validaUsuario(int cpfUser) throws SQLException{
+        String sql = "SELECT * FROM usuarioo WHERE cpf = "+cpfUser;
+        Connection connection = null;
+        Statement stament = null;
+        
+        try{
+            Class.forName("org.sqlite.JDBC");
+            connection  =DriverManager.getConnection("jdbc:sqlite:transpoint.db");
+            stament = connection.createStatement();
+            ResultSet rs = stament.executeQuery(sql);
+            while(rs.next()){
+                Usuario user = new Usuario();
+                ArrayList cartoes;
+                user.setIdUser(Integer.parseInt(rs.getString("id")));
+                user.setSenha(rs.getString("senha"));
+                user.setCpf(cpfUser);
+                cartoes = recuperaCartoesUsuario(user);
+                user.setCartoesTranscol(cartoes);
+            }               
+            stament.close();
+            connection.close();
+        } catch (ClassNotFoundException ex) {
+                ex.printStackTrace();
+        } catch (SQLException ex) {
+                ex.printStackTrace();
+                throw ex;
+        } catch (Exception ex) {
+            Logger.getLogger(PersistenciaCartao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }
     

@@ -24,9 +24,10 @@ public class Tarifa {
             try{
                 c.setSaldo(-valor);
             } catch (Exception e){
-                throw e;
+                c.setDisponivel(false);
+                throw e; //Seria interessante mostrar pro usuário
             }
-        }
+        } else throw new Exception ("Cartão indisponível, operação negada.");
         
         
     }

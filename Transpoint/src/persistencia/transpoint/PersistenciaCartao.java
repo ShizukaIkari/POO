@@ -64,7 +64,6 @@ public class PersistenciaCartao {
     }
     
     
-    
     //Retorna uma lista com todos os cartões disponíveis associados ao usuário
     public ArrayList recuperaCartoesUsuario(Usuario u) throws SQLException{
         ArrayList<Cartao> allCards = new ArrayList<>();

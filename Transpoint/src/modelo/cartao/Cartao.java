@@ -5,6 +5,8 @@
  */
 package modelo.cartao;
 
+import modelo.pagamento.Passagem;
+
 public class Cartao {
     private Categoria categoria;
     private int codigo;
@@ -68,14 +70,12 @@ public class Cartao {
     }
 
     public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
+        Passagem p = new Passagem();
+        if(this.categoria.isGratuita()){
+            this.disponivel = disponivel;
+        } else if (((this.saldo - (p.getValorPassagem()*this.categoria.getDesconto()))<0) || this.saldo == 0){
+            this.disponivel = false;
+        } else this.disponivel = disponivel;
     }
 
-   
-    
-      
-    
-    
-    
-    
 }

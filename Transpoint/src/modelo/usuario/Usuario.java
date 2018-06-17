@@ -16,13 +16,16 @@ public class Usuario extends Pessoa {
     private int idUser;
     private String senha;
     private ArrayList<Cartao> cartoesTranscol;
-    
+
+    public void setCartoesTranscol(ArrayList<Cartao> cartoesTranscol) {
+        this.cartoesTranscol = cartoesTranscol;
+    }
     
     //Vai verificar no BD cartões relacionados à pessoa usuária e adicionar na lista
     public void addCartao(Cartao card){
         cartoesTranscol.add(card);
     }
-
+    
     public int getIdUser() {
         return idUser;
     }
@@ -30,6 +33,17 @@ public class Usuario extends Pessoa {
     public void setIdUser(int idUser) {
         this.idUser = idUser;
     }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) throws Exception {
+        if(!senha.isEmpty())
+            this.senha = senha;
+        else throw new Exception ("Senha não pode ser vazia.");
+    }
+    
     
     /*
     //Caso um cartão seja cancelado ele é removido da lista
@@ -47,12 +61,8 @@ public class Usuario extends Pessoa {
     } 
     
     */
-    public void listarCartoes(ArrayList<Cartao> cards){
-        int i=1;
-        for(Cartao card : cards){
-            System.out.println(i + " - " + card.getCategoria().getTipo() + ";");
-            i++;
-        }
+    public ArrayList getCartoes(){
+        return cartoesTranscol;
     }
         
 }
