@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.cartao.Cartao;
 import modelo.usuario.Usuario;
+import persistencia.transpoint.PersistenciaCartao;
 
 
 /**
@@ -25,9 +26,9 @@ public class PersistenciaUsuario {
       
     public void criarTabelaUsuario(){     
         String sql = "CREATE TABLE usuario"+
-                "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                "(idUser INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "cpf INTEGER NOT NULL,"
-                + "senha VARCHAR(60) NOT NULL";     
+                + "senha VARCHAR(60) NOT NULL)";     
         this.executeSQL(sql);        
     }
 
@@ -58,17 +59,18 @@ public class PersistenciaUsuario {
     //Salva usuário no banco
     public void salvaUsuario(Usuario u){
         String sql = "INSERT INTO usuario (cpf,idUser,senha)"
-        +"values ('" +
+        +"values (" +
         u.getCpf()+","+
-        u.getIdUser()+","+
-        u.getSenha()+")";
+        u.getIdUser()+",'"+
+        u.getSenha()+"')";
         this.executeSQL(sql);
     }
     
-    public Usuario validaUsuario(int cpfUser) throws SQLException{
-        String sql = "SELECT * FROM usuarioo WHERE cpf = "+cpfUser;
+    public boolean validaUsuario(int cpfUser) throws SQLException{
+        String sql = "SELECT * FROM usuario WHERE cpf = "+cpfUser;
         Connection connection = null;
         Statement stament = null;
+        PersistenciaCartao persCard = new PersistenciaCartao();
         
         try{
             Class.forName("org.sqlite.JDBC");
@@ -77,13 +79,14 @@ public class PersistenciaUsuario {
             ResultSet rs = stament.executeQuery(sql);
             while(rs.next()){
                 Usuario user = new Usuario();
-                ArrayList cartoes;
+                ArrayList<Cartao> cartoes;
                 user.setIdUser(Integer.parseInt(rs.getString("id")));
                 user.setSenha(rs.getString("senha"));
                 user.setCpf(cpfUser);
-                cartoes = recuperaCartoesUsuario(user);
+                cartoes = persCard.recuperaCartoesUsuario(user);
                 user.setCartoesTranscol(cartoes);
             }               
+            
             stament.close();
             connection.close();
         } catch (ClassNotFoundException ex) {
@@ -94,6 +97,8 @@ public class PersistenciaUsuario {
         } catch (Exception ex) {
             Logger.getLogger(PersistenciaCartao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
     }
     
 }

@@ -37,6 +37,7 @@ public class PersistenciaCartao {
     }
     
     
+    
     public void executeSQL(String sql) {
         
         Connection connection = null;
@@ -65,7 +66,7 @@ public class PersistenciaCartao {
     
     
     //Retorna uma lista com todos os cartões disponíveis associados ao usuário
-    public ArrayList recuperaCartoesUsuario(Usuario u) throws SQLException{
+    public ArrayList<Cartao> recuperaCartoesUsuario(Usuario u) throws SQLException{
         ArrayList<Cartao> allCards = new ArrayList<>();
         String sql ="SELECT * FROM cartao WHERE idUser = " + u.getIdUser();
         Connection connection = null;
@@ -108,13 +109,15 @@ public class PersistenciaCartao {
     }
     
     public void salvaCartao(Cartao card){
-        String sql = "INSERT INTO cartao (codigo,idUser,categoria,saldo,disponivel)"
-        +"values ('" +
+        
+        String bool = card.isDisponivel()+"";
+        String sql = "INSERT INTO cartao (codigo,idUser,categoria,saldo,disponivel)" //BOOLEAN É CAPS ATIVADO!
+        +"values (" +
         card.getCodigo()+","+
-        card.getIdUser()+","+
-        card.getTipoCategoria()+","+
+        card.getIdUser()+",'"+
+        card.getTipoCategoria()+"',"+
         card.getSaldo()+","+
-        card.isDisponivel()+")";
+        bool.toUpperCase()+")";
         this.executeSQL(sql);
     }
     
