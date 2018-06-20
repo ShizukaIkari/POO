@@ -104,31 +104,33 @@ public class PersistenciaUsuario {
         
     }
     
-    public Usuario validaUsuario(int cpfUser) throws SQLException{
+    public Usuario validaUsuario(int cpfUser, String senha) throws SQLException{
         String sql = "SELECT * FROM usuario WHERE cpf = "+cpfUser;
         Connection connection = null;
         Statement stament = null;
-        PersistenciaCartao persCard = new PersistenciaCartao();
-        
+        Usuario user =null;
         try{
             Class.forName("org.sqlite.JDBC");
             connection  =DriverManager.getConnection("jdbc:sqlite:transpoint.db");
             stament = connection.createStatement();
             ResultSet rs = stament.executeQuery(sql);
-            Usuario user =null;
-            while(rs.next()){
-                user=new Usuario();
-                ArrayList<Cartao> cartoes;
-                user.setIdUser(Integer.parseInt(rs.getString("id")));
-                user.setSenha(rs.getString("senha"));
-                user.setCpf(cpfUser);
-                cartoes = persCard.recuperaCartoesUsuario(user);
-                user.setCartoesTranscol(cartoes);
-            }               
             
+            while(rs.next()){               
+               
+                if(senha==rs.getString("senha")){
+                 user=new Usuario();
+                 user.setSenha(rs.getString("senha"));
+                 user=recuperaUsuario(cpfUser);
+                }
+                else{
+                    throw new Exception ("Senha inválida!");
+                }
+               
+            }               
             stament.close();
             connection.close();
             return user;
+            
         } catch (ClassNotFoundException ex) {
                 ex.printStackTrace();
         } catch (SQLException ex) {
@@ -137,7 +139,7 @@ public class PersistenciaUsuario {
         } catch (Exception ex) {
             Logger.getLogger(PersistenciaCartao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return user;
         
         
     }
