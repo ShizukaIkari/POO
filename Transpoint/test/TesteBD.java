@@ -43,6 +43,14 @@ public class TesteBD {
         PersistenciaCartao instance = new PersistenciaCartao();
         instance.criarTabelaCartao();
     }
+    
+    @Test
+    public void testUpdateTable(){
+        PersistenciaCartao instance = new PersistenciaCartao();
+        String sql = "ALTER TABLE cartao ADD idUser INTEGER NOT NULL;";
+        instance.executeSQL(sql);
+    }
+    
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //

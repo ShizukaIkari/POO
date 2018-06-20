@@ -106,6 +106,7 @@ public class PersistenciaUsuario {
     
     public Usuario validaUsuario(int cpfUser, String senha) throws SQLException{
         String sql = "SELECT * FROM usuario WHERE cpf = "+cpfUser;
+        boolean inside=false;
         Connection connection = null;
         Statement stament = null;
         Usuario user =null;
@@ -116,7 +117,7 @@ public class PersistenciaUsuario {
             ResultSet rs = stament.executeQuery(sql);
             
             while(rs.next()){               
-               
+                inside=true;
                 if(senha==rs.getString("senha")){
                  user=new Usuario();
                  user.setSenha(rs.getString("senha"));
@@ -126,7 +127,11 @@ public class PersistenciaUsuario {
                     throw new Exception ("Senha inválida!");
                 }
                
-            }               
+            } 
+            if(!inside){
+                throw new Exception ("Usuário não existe!");
+            }
+            
             stament.close();
             connection.close();
             return user;
