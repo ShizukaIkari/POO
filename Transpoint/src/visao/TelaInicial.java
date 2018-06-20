@@ -6,6 +6,7 @@
 package visao;
 
 import javax.swing.JOptionPane;
+import persistencia.transpoint.PersistenciaUsuario;
 
 /**
  *
@@ -149,6 +150,24 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void bLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLogarActionPerformed
         // TODO add your handling code here:
+        
+        PersistenciaUsuario perUser =new PersistenciaUsuario();
+        Usuario user = perUser.validaUsuario(Integer.parseInt(loginCPF.getText()),senha.getPassword());
+        if(user == null){
+            //msg: usuario não existe;            
+        }else{
+            UITranspoint telaInicial = new UITranspoint(user);
+            telaInicial.setVisible(true);            
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
         
     }//GEN-LAST:event_bLogarActionPerformed
 

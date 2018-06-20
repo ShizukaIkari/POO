@@ -5,12 +5,9 @@
  */
 package modelo.usuario;
 
-import java.util.ArrayList;
-import modelo.cartao.Cartao;
-
 /**
  *
- * @author Salzman
+ * @
  */
 public abstract class Pessoa {
     public String nome;
