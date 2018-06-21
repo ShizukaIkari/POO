@@ -60,7 +60,7 @@ public class PersistenciaUsuario {
         PersistenciaPessoa p = new PersistenciaPessoa();
         String sql = "INSERT INTO usuario (cpf,senha)"
         +"values (" +
-        u.getCpf()+","+
+        u.getCpf()+",'"+
         u.getSenha()+"')";
         p.salvaPessoa(u);
         this.executeSQL(sql);

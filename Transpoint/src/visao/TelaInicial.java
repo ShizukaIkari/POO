@@ -35,10 +35,10 @@ public class TelaInicial extends javax.swing.JFrame {
         exibLogin = new javax.swing.JLabel();
         exibSenha = new javax.swing.JLabel();
         senha = new javax.swing.JPasswordField();
-        loginCPF = new javax.swing.JFormattedTextField();
         tSemCadastro = new javax.swing.JLabel();
         bCadastro = new javax.swing.JButton();
         bLogar = new javax.swing.JButton();
+        loginCPF = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -58,8 +58,6 @@ public class TelaInicial extends javax.swing.JFrame {
         });
 
         exibSenha.setText("Senha:");
-
-        loginCPF.setText(" ");
 
         tSemCadastro.setText("Não possui cadastro?");
 
@@ -101,9 +99,9 @@ public class TelaInicial extends javax.swing.JFrame {
                     .addComponent(exibLogin)
                     .addComponent(exibSenha))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(loginCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(senha, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                    .addComponent(loginCPF))
                 .addGap(0, 68, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,17 +123,17 @@ public class TelaInicial extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(tituloFrame)
-                .addGap(40, 40, 40)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loginCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(exibLogin))
+                    .addComponent(exibLogin)
+                    .addComponent(loginCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(exibSenha)
                     .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addComponent(bLogar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(tSemCadastro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bCadastro)
@@ -162,7 +160,7 @@ public class TelaInicial extends javax.swing.JFrame {
         try{
             user = perUser.validaUsuario(Integer.parseInt(loginCPF.getText()),senha.getText());
         } catch (Exception e){
-            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return ;
         }
         UITranspoint telaTranspoint = new UITranspoint(user);
@@ -219,7 +217,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JFormattedTextField loginCPF;
+    private javax.swing.JTextField loginCPF;
     private javax.swing.JPasswordField senha;
     private javax.swing.JLabel tSemCadastro;
     private javax.swing.JLabel tituloFrame;

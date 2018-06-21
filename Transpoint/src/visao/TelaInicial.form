@@ -57,9 +57,9 @@
                   <Component id="exibSenha" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="senha" min="-2" pref="143" max="-2" attributes="0"/>
-                  <Component id="loginCPF" min="-2" pref="143" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="senha" pref="143" max="32767" attributes="0"/>
+                  <Component id="loginCPF" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="68" max="32767" attributes="0"/>
           </Group>
@@ -90,10 +90,10 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Component id="tituloFrame" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="loginCPF" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                   <Component id="exibLogin" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="loginCPF" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -102,7 +102,7 @@
               </Group>
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Component id="bLogar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="37" max="32767" attributes="0"/>
+              <EmptySpace pref="38" max="32767" attributes="0"/>
               <Component id="tSemCadastro" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="bCadastro" min="-2" max="-2" attributes="0"/>
@@ -135,11 +135,6 @@
     </Component>
     <Component class="javax.swing.JPasswordField" name="senha">
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="loginCPF">
-      <Properties>
-        <Property name="text" type="java.lang.String" value=" "/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="tSemCadastro">
       <Properties>
         <Property name="text" type="java.lang.String" value="N&#xe3;o possui cadastro?"/>
@@ -157,6 +152,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bLogarActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="loginCPF">
     </Component>
   </SubComponents>
 </Form>

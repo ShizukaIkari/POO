@@ -160,4 +160,18 @@ public class PersistenciaCartao {
         
         return null;
     }
+
+
+//"update cartao set saldo=" + c.getSaldo()" , disponivel=" + c.getIsDisponivel()toUpperCase() + " WHERE cpfUser =" + c.getCpfUser
+
+public void atualizaCartao(Cartao c){
+    String d = c.isDisponivel()+"";
+    String sql = "UPDATE cartao SET saldo=" 
+    + c.getSaldo()+", disponivel=" 
+    + d.toUpperCase()
+    + " WHERE codigo =" + c.getCodigo();
+    this.executeSQL(sql);
+}
+
+
 }

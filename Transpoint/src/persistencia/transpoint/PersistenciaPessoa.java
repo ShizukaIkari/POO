@@ -58,9 +58,9 @@ public class PersistenciaPessoa {
         +"values (" +
         u.getRG()+","+
         u.getCpf()+",'"+
-        u.getNome()+"',"+
-        u.getDataNascimento()+","+
-        u.getTelefone()+")";
+        u.getNome()+"','"+
+        u.getDataNascimento()+"','"+
+        u.getTelefone()+"')";
         this.executeSQL(sql);
     }
     
