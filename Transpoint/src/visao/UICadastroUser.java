@@ -5,6 +5,11 @@
  */
 package visao;
 
+import javax.swing.JOptionPane;
+import modelo.usuario.Pessoa;
+import modelo.usuario.Usuario;
+import persistencia.transpoint.PersistenciaUsuario;
+
 /**
  *
  * @author Serenna
@@ -28,30 +33,192 @@ public class UICadastroUser extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        labelNome = new javax.swing.JLabel();
+        labelDataNasc = new javax.swing.JLabel();
+        labelRG = new javax.swing.JLabel();
+        labelCPF = new javax.swing.JLabel();
+        labelSenha = new javax.swing.JLabel();
+        nome = new javax.swing.JTextField();
+        dataNasc = new javax.swing.JTextField();
+        rg = new javax.swing.JTextField();
+        cpfLogin = new javax.swing.JTextField();
+        senha = new javax.swing.JPasswordField();
+        bConfirma = new javax.swing.JButton();
+        bCancela = new javax.swing.JButton();
+        labelBairro = new javax.swing.JLabel();
+        labelCidade = new javax.swing.JLabel();
+        labelEstado = new javax.swing.JLabel();
+        bairro = new javax.swing.JTextField();
+        cidade = new javax.swing.JTextField();
+        estado = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        confirmSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Cadastro de Usuário");
+
+        labelNome.setText("Nome Completo:");
+
+        labelDataNasc.setText("Data de Nascimento:");
+
+        labelRG.setText("RG:");
+
+        labelCPF.setText("CPF:");
+
+        labelSenha.setText("Defina uma senha:");
+
+        bConfirma.setText("Confirmar");
+        bConfirma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bConfirmaActionPerformed(evt);
+            }
+        });
+
+        bCancela.setText("Cancelar");
+        bCancela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCancelaActionPerformed(evt);
+            }
+        });
+
+        labelBairro.setText("CEP:");
+
+        labelCidade.setText("Cidade:");
+
+        labelEstado.setText("Estado:");
+
+        jLabel2.setText("Confirme a senha:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(129, 129, 129)
-                .addComponent(jLabel1)
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelDataNasc)
+                                    .addComponent(labelRG)
+                                    .addComponent(labelCPF)
+                                    .addComponent(labelSenha)
+                                    .addComponent(jLabel2))
+                                .addGap(28, 28, 28)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(dataNasc)
+                                    .addComponent(rg)
+                                    .addComponent(cpfLogin)
+                                    .addComponent(senha)
+                                    .addComponent(confirmSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelBairro)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(labelEstado)
+                                        .addComponent(labelCidade))
+                                    .addComponent(labelNome))
+                                .addGap(51, 51, 51)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(bairro)
+                                        .addComponent(cidade)
+                                        .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addContainerGap(32, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(bCancela)
+                .addGap(18, 18, 18)
+                .addComponent(bConfirma)
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(435, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNome)
+                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelBairro)
+                    .addComponent(bairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelCidade)
+                    .addComponent(cidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelEstado)
+                    .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelDataNasc)
+                    .addComponent(dataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelRG)
+                    .addComponent(rg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCPF)
+                    .addComponent(cpfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelSenha)
+                    .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(confirmSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bCancela)
+                    .addComponent(bConfirma))
+                .addGap(24, 24, 24))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConfirmaActionPerformed
+        Usuario u = new Usuario();
+        PersistenciaUsuario bdUsuario = new PersistenciaUsuario();
+        
+        u.setCpf(Integer.parseInt(cpfLogin.getText()));
+        if(senha.getText().equals(confirmSenha.getText())){
+            try {
+                u.setSenha(senha.getText());
+            } catch (Exception ex){
+                JOptionPane.showMessageDialog(null,ex.getMessage());
+                return;
+            }
+            u.setDataNascimento(dataNasc.getText());
+            u.setNome(nome.getText());
+            u.setRG(Integer.parseInt(rg.getText()));
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Senhas não conferem.");
+            return;
+        }
+        
+        bdUsuario.salvaUsuario(u);
+        TelaInicial firstTela = new TelaInicial();
+    }//GEN-LAST:event_bConfirmaActionPerformed
+
+    private void bCancelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelaActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_bCancelaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -89,6 +256,26 @@ public class UICadastroUser extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bCancela;
+    private javax.swing.JButton bConfirma;
+    private javax.swing.JTextField bairro;
+    private javax.swing.JTextField cidade;
+    private javax.swing.JPasswordField confirmSenha;
+    private javax.swing.JTextField cpfLogin;
+    private javax.swing.JTextField dataNasc;
+    private javax.swing.JTextField estado;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel labelBairro;
+    private javax.swing.JLabel labelCPF;
+    private javax.swing.JLabel labelCidade;
+    private javax.swing.JLabel labelDataNasc;
+    private javax.swing.JLabel labelEstado;
+    private javax.swing.JLabel labelNome;
+    private javax.swing.JLabel labelRG;
+    private javax.swing.JLabel labelSenha;
+    private javax.swing.JTextField nome;
+    private javax.swing.JTextField rg;
+    private javax.swing.JPasswordField senha;
     // End of variables declaration//GEN-END:variables
 }

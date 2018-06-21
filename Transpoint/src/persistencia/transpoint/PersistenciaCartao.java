@@ -28,7 +28,7 @@ public class PersistenciaCartao {
         String sql = "CREATE TABLE cartao"+
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "codigo INTEGER NOT NULL,"
-                + "idUser INTEGER NOT NULL,"
+                + "cpfUser INTEGER NOT NULL"
                 + "categoria CHAR(60) NOT NULL,"
                 + "saldo NUMERIC NOT NULL,"
                 + "disponivel BOOLEAN)";
@@ -68,7 +68,7 @@ public class PersistenciaCartao {
     //Retorna uma lista com todos os cartões disponíveis associados ao usuário
     public ArrayList<Cartao> recuperaCartoesUsuario(Usuario u) throws SQLException{
         ArrayList<Cartao> allCards = new ArrayList<>();
-        String sql ="SELECT * FROM cartao WHERE idUser = " + u.getIdUser();
+        String sql ="SELECT * FROM cartao WHERE cpfUser = " + u.getCpf();
         Connection connection = null;
         Statement stament = null;
         
@@ -111,14 +111,53 @@ public class PersistenciaCartao {
     public void salvaCartao(Cartao card){
         
         String bool = card.isDisponivel()+"";
-        String sql = "INSERT INTO cartao (codigo,idUser,categoria,saldo,disponivel)" //BOOLEAN É CAPS ATIVADO!
+        String sql = "INSERT INTO cartao (codigo,cpfUser,categoria,saldo,disponivel)" //BOOLEAN É CAPS ATIVADO!
         +"values (" +
         card.getCodigo()+","+
-        card.getIdUser()+",'"+
+        card.getCpfUser()+",'"+
         card.getTipoCategoria()+"',"+
         card.getSaldo()+","+
         bool.toUpperCase()+")";
         this.executeSQL(sql);
     }
     
+    public Cartao recuperaCartao(int codigo) throws SQLException{
+        String sql ="SELECT * FROM cartao WHERE codigo = " + codigo;
+        Connection connection = null;
+        Statement stament = null;
+        
+        try {
+            //verifica se as classe da biblioteca existem
+         Class.forName("org.sqlite.JDBC");
+         //abre a conexao com o  banco de dados
+         connection  =DriverManager.getConnection("jdbc:sqlite:transpoint.db");
+         System.out.println("Banco de dados aberto");   
+         stament = connection.createStatement();
+         //executa a query no meu banco de dados
+         ResultSet rs = stament.executeQuery(sql);         
+         while(rs.next()){
+             String cat = rs.getString("categoria");
+             Cartao card = new Cartao(cat);
+             card.setCodigo(Integer.parseInt(rs.getString("codigo")));
+             card.setSaldo(Double.parseDouble(rs.getString("saldo")));
+             card.setDisponivel(Boolean.parseBoolean("isDisponivel"));
+             return card;
+         }             
+         stament.close();
+         //fecha a conexao com o banco de dados
+         connection.close();
+         
+         
+            
+        } catch (ClassNotFoundException ex) {
+                ex.printStackTrace();
+        } catch (SQLException ex) {
+                ex.printStackTrace();
+                throw ex;
+        } catch (Exception ex) {
+            Logger.getLogger(PersistenciaCartao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
 }

@@ -26,9 +26,8 @@ public class PersistenciaUsuario {
       
     public void criarTabelaUsuario(){     
         String sql = "CREATE TABLE usuario"+
-                "(idUser INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "cpf INTEGER NOT NULL,"
-                + "senha VARCHAR(60) NOT NULL)";     
+                "(cpf INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "senha VARCHAR(20) NOT NULL)";     
         this.executeSQL(sql);        
     }
 
@@ -58,11 +57,12 @@ public class PersistenciaUsuario {
     }
     //Salva usuário no banco
     public void salvaUsuario(Usuario u){
-        String sql = "INSERT INTO usuario (cpf,idUser,senha)"
+        PersistenciaPessoa p = new PersistenciaPessoa();
+        String sql = "INSERT INTO usuario (cpf,senha)"
         +"values (" +
         u.getCpf()+","+
-        u.getIdUser()+",'"+
         u.getSenha()+"')";
+        p.salvaPessoa(u);
         this.executeSQL(sql);
     }
     
@@ -81,7 +81,6 @@ public class PersistenciaUsuario {
             while(rs.next()){
                 user=new Usuario();
                 ArrayList<Cartao> cartoes;
-                user.setIdUser(Integer.parseInt(rs.getString("id")));
                 user.setSenha(rs.getString("senha"));
                 user.setCpf(cpfUser);
                 cartoes = persCard.recuperaCartoesUsuario(user);
@@ -118,10 +117,9 @@ public class PersistenciaUsuario {
             
             while(rs.next()){               
                 inside=true;
-                if(senha==rs.getString("senha")){
-                 user=new Usuario();
-                 user.setSenha(rs.getString("senha"));
-                 user=recuperaUsuario(cpfUser);
+                if(senha.equals(rs.getString("senha"))){
+                    user=new Usuario();
+                    user=recuperaUsuario(cpfUser);
                 }
                 else{
                     throw new Exception ("Senha inválida!");

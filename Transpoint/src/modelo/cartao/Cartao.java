@@ -12,28 +12,28 @@ public class Cartao {
     private int codigo;
     private boolean disponivel;
     private double saldo;
-    private int idUser;
+    private int cpfUser;
 
     
   
-    public Cartao(int codigo, boolean disponivel, double saldo, String descricao, int idUser){
+    public Cartao(int codigo, boolean disponivel, double saldo, String descricao, int cpfUser){
         this.categoria = new Categoria(descricao);
         this.codigo = codigo;
         this.disponivel = disponivel;
         this.saldo = saldo;
-        this.idUser = idUser;
+        this.cpfUser = cpfUser;
     }
     
     public Cartao(String categoria){
         this.categoria = new Categoria(categoria);
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setCpfUser(int cpfUser) {
+        this.cpfUser = cpfUser;
     }
     
-    public int getIdUser() {
-        return idUser;
+    public int getCpfUser() {
+        return cpfUser;
     }
 
     public Categoria getCategoria() {

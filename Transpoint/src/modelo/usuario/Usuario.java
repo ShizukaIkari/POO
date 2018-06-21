@@ -13,7 +13,6 @@ import modelo.cartao.Cartao;
  * @author 20161bsi0403
  */
 public class Usuario extends Pessoa {
-    private int idUser;
     private String senha;
     private ArrayList<Cartao> cartoesTranscol;
 
@@ -26,14 +25,6 @@ public class Usuario extends Pessoa {
         cartoesTranscol.add(card);
     }
     
-    public int getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
-
     public String getSenha() {
         return senha;
     }

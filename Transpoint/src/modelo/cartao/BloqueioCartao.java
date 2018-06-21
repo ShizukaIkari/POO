@@ -23,11 +23,10 @@ public class BloqueioCartao {
     private String motivo; 
     
    
-    public void pedirBloqueio(Cartao card){
+    public void pedirBloqueio(Cartao card, String reason){
         data = new Date();
         dataHora = dateFormat.format(data);
-        JOptionPane.showMessageDialog(null, "Isto deixará seu cartão indisponível no app, deseja continuar?"); // Fazer um Sim ou Não
-        motivo = JOptionPane.showInputDialog(null, "Informe o motivo:");
+        motivo = reason;
         card.setDisponivel(false);
         /*Guardar no banco de dados: saldo do cartão, código, disponibilidade, data e hora ?, motivo*/
     }

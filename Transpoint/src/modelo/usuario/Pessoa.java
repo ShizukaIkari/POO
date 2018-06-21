@@ -9,13 +9,12 @@ package modelo.usuario;
  *
  * @
  */
-public abstract class Pessoa {
+public class Pessoa {
     public String nome;
-    public Endereco endereco;
     public String telefone;
     private int cpf;
     private String dataNascimento;
-    private RG rg;
+    private int rg;
     private CartaoCredito cartaoCredito = null;
     
 
@@ -35,15 +34,12 @@ public abstract class Pessoa {
         return dataNascimento;
     }
     
-    public RG getRG(){
+    public int getRG(){
         return this.rg;
     }
     
-    public void setRG(String dataNascimento, String orgaoEmissor, String codigo){
-        this.rg.setDataNascimento(dataNascimento);
-        this.rg.setOrgaoEmissor(orgaoEmissor);
-        this.rg.setCodigo(codigo);
-        
+    public void setRG(int codigo){
+        this.rg = codigo;
     }
     
     public CartaoCredito getCartaoCredito(){
@@ -64,9 +60,6 @@ public abstract class Pessoa {
         this.nome = nome;
     }
     
-    public String getEndereco(){
-        return endereco.getEndereco();
-    }
 
     public String getTelefone() {
         return telefone;
