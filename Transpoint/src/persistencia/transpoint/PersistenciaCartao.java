@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.cartao.Cartao;
-import modelo.cartao.Categoria;
-import modelo.usuario.Pessoa;
 import modelo.usuario.Usuario;
 
 /**

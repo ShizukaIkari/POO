@@ -8,6 +8,8 @@ package visao;
 import javax.swing.JOptionPane;
 import modelo.usuario.Pessoa;
 import modelo.usuario.Usuario;
+import persistencia.transpoint.PersistenciaCartao;
+import persistencia.transpoint.PersistenciaPessoa;
 import persistencia.transpoint.PersistenciaUsuario;
 
 /**
@@ -189,10 +191,23 @@ public class UICadastroUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConfirmaActionPerformed
-        Usuario u = new Usuario();
+        PersistenciaCartao cartoesUser = new PersistenciaCartao();
+        PersistenciaPessoa pessoaGV = new PersistenciaPessoa();
         PersistenciaUsuario bdUsuario = new PersistenciaUsuario();
+        Pessoa pessoaUser = null;
+        Usuario u = null ;
+        try{
+            pessoaUser = pessoaGV.recuperaDadosPessoa(Integer.parseInt(cpfLogin.getText()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(pessoaUser != null){
+            u = new Usuario();
+            u.setCpf(pessoaUser.getCpf());
+        }
         
-        u.setCpf(Integer.parseInt(cpfLogin.getText()));
+        
+        
         if(senha.getText().equals(confirmSenha.getText())){
             try {
                 u.setSenha(senha.getText());
