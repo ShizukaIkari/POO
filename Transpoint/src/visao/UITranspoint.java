@@ -5,7 +5,11 @@
  */
 package visao;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import modelo.cartao.Cartao;
 import modelo.usuario.Usuario;
+import persistencia.transpoint.PersistenciaCartao;
 
 /**
  *
@@ -24,8 +28,29 @@ public class UITranspoint extends javax.swing.JFrame {
         this.user = user;
     }
     
+    private void atualizaTabela(Usuario u){
+        DefaultTableModel tableCards = (DefaultTableModel) tabelaCartoes.getModel();
+        tableCards.getDataVector().removeAllElements();
+        tableCards.fireTableDataChanged();
+        PersistenciaCartao persCard = new PersistenciaCartao();
+        ArrayList<Cartao> cartoes = null;
+        try{
+            cartoes = persCard.recuperaCartoesUsuario(u);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        for (Cartao card: cartoes){
+            tableCards.addRow(new Object[] {
+                card.getCodigo(),
+                card.getCategoria().getTipo(),
+                card.getSaldo(),
+                card.isDisponivel()
+            });
+        }
+        
+    }
     
-    
+        
     /**
      * Creates new form UITranspoint
      */
@@ -35,8 +60,8 @@ public class UITranspoint extends javax.swing.JFrame {
     public UITranspoint(Usuario user) {
         this.user = user;
         initComponents();
-        this.nomeUser.setText(user.nome); //mostrando o nome do usuário na tela
-                   
+        nomeUser.setText(user.nome); //mostrando o nome do usuário na tela
+        atualizaTabela(user);    
     }
 
     /**
@@ -51,19 +76,22 @@ public class UITranspoint extends javax.swing.JFrame {
         labelGreetings = new javax.swing.JLabel();
         nomeUser = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        tabelaCartoes = new javax.swing.JTable();
+        jbRecarga = new javax.swing.JButton();
+        jbBloqueio = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        labelGreetings.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelGreetings.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         labelGreetings.setText("Olá,");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        nomeUser.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        tabelaCartoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -71,11 +99,14 @@ public class UITranspoint extends javax.swing.JFrame {
                 "Código", "Categoria", "Saldo", "Disponibilidade"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaCartoes);
 
-        jButton1.setText("Recarregar");
+        jbRecarga.setText("Recarregar");
 
-        jButton2.setText("Solicitar Bloqueio");
+        jbBloqueio.setText("Solicitar Bloqueio");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Cartões Cadastrados:");
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -92,16 +123,21 @@ public class UITranspoint extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelGreetings)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nomeUser))
+                        .addComponent(nomeUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(33, 33, 33)
-                        .addComponent(jButton2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(jbRecarga)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbBloqueio))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,14 +145,16 @@ public class UITranspoint extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelGreetings)
-                    .addComponent(nomeUser))
-                .addGap(69, 69, 69)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nomeUser, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(94, Short.MAX_VALUE))
+                    .addComponent(jbRecarga)
+                    .addComponent(jbBloqueio))
+                .addGap(45, 45, 45))
         );
 
         pack();
@@ -158,14 +196,15 @@ public class UITranspoint extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbBloqueio;
+    private javax.swing.JButton jbRecarga;
     private javax.swing.JLabel labelGreetings;
     private javax.swing.JLabel nomeUser;
+    private javax.swing.JTable tabelaCartoes;
     // End of variables declaration//GEN-END:variables
 }

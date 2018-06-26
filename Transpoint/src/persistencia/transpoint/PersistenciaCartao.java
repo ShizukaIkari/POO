@@ -28,7 +28,7 @@ public class PersistenciaCartao {
                 + "codigo INTEGER NOT NULL,"
                 + "cpfUser INTEGER NOT NULL"
                 + "categoria CHAR(60) NOT NULL,"
-                + "saldo NUMERIC NOT NULL,"
+                + "saldo FLOAT NOT NULL,"
                 + "disponivel BOOLEAN)";
    
         this.executeSQL(sql);        
@@ -85,7 +85,7 @@ public class PersistenciaCartao {
              Cartao card = new Cartao(cat);
              card.setCodigo(Integer.parseInt(rs.getString("codigo")));
              card.setSaldo(Double.parseDouble(rs.getString("saldo")));
-             card.setDisponivel(Boolean.parseBoolean("isDisponivel"));
+             card.setDisponivel(Boolean.parseBoolean(rs.getString("disponivel")));
              allCards.add(card);
          }             
          stament.close();
@@ -114,8 +114,8 @@ public class PersistenciaCartao {
         card.getCodigo()+","+
         card.getCpfUser()+",'"+
         card.getTipoCategoria()+"',"+
-        card.getSaldo()+","+
-        bool.toUpperCase()+")";
+        card.getSaldo()+",'"+
+        bool.toUpperCase()+"')";
         this.executeSQL(sql);
     }
     
@@ -138,7 +138,7 @@ public class PersistenciaCartao {
              Cartao card = new Cartao(cat);
              card.setCodigo(Integer.parseInt(rs.getString("codigo")));
              card.setSaldo(Double.parseDouble(rs.getString("saldo")));
-             card.setDisponivel(Boolean.parseBoolean("isDisponivel"));
+             card.setDisponivel(Boolean.parseBoolean(rs.getString("disponivel")));
              return card;
          }             
          stament.close();

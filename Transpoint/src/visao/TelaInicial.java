@@ -40,7 +40,7 @@ public class TelaInicial extends javax.swing.JFrame {
         bLogar = new javax.swing.JButton();
         loginCPF = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jmAjuda = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -62,6 +62,11 @@ public class TelaInicial extends javax.swing.JFrame {
         tSemCadastro.setText("Não possui cadastro?");
 
         bCadastro.setText("Cadastrar-se!");
+        bCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCadastroActionPerformed(evt);
+            }
+        });
 
         bLogar.setText("Confirmar");
         bLogar.addActionListener(new java.awt.event.ActionListener() {
@@ -70,7 +75,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("Ajuda");
+        jmAjuda.setText("Ajuda");
 
         jMenuItem1.setText("Sobre");
         jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -83,9 +88,9 @@ public class TelaInicial extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jmAjuda.add(jMenuItem1);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jmAjuda);
 
         setJMenuBar(jMenuBar1);
 
@@ -160,7 +165,7 @@ public class TelaInicial extends javax.swing.JFrame {
         try{
             user = perUser.validaUsuario(Integer.parseInt(loginCPF.getText()),senha.getText());
         } catch (Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
             return ;
         }
         UITranspoint telaTranspoint = new UITranspoint(user);
@@ -172,6 +177,13 @@ public class TelaInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(rootPane, "Seu próprio CPF é seu login!");
     }//GEN-LAST:event_exibLoginMouseEntered
+
+    private void bCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastroActionPerformed
+        // TODO add your handling code here:
+        UICadastroUser cadastrar = new UICadastroUser();
+        cadastrar.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_bCadastroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,9 +226,9 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JButton bLogar;
     private javax.swing.JLabel exibLogin;
     private javax.swing.JLabel exibSenha;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenu jmAjuda;
     private javax.swing.JTextField loginCPF;
     private javax.swing.JPasswordField senha;
     private javax.swing.JLabel tSemCadastro;

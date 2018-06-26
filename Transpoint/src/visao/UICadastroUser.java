@@ -35,34 +35,20 @@ public class UICadastroUser extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        labelNome = new javax.swing.JLabel();
-        labelDataNasc = new javax.swing.JLabel();
-        labelRG = new javax.swing.JLabel();
         labelCPF = new javax.swing.JLabel();
         labelSenha = new javax.swing.JLabel();
-        nome = new javax.swing.JTextField();
-        dataNasc = new javax.swing.JTextField();
-        rg = new javax.swing.JTextField();
         cpfLogin = new javax.swing.JTextField();
         senha = new javax.swing.JPasswordField();
         bConfirma = new javax.swing.JButton();
         bCancela = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         confirmSenha = new javax.swing.JPasswordField();
-        lblTel = new javax.swing.JLabel();
-        telefone = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Cadastro de Usuário");
-
-        labelNome.setText("Nome Completo:");
-
-        labelDataNasc.setText("Data de Nascimento:");
-
-        labelRG.setText("RG:");
 
         labelCPF.setText("CPF:");
 
@@ -84,107 +70,60 @@ public class UICadastroUser extends javax.swing.JFrame {
 
         jLabel2.setText("Confirme a senha:");
 
-        lblTel.setText("Telefone:");
-
-        telefone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                telefoneActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(bCancela)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bConfirma))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addContainerGap(2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(labelDataNasc)
-                                            .addComponent(labelCPF)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(labelNome))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(labelRG)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                                    .addComponent(dataNasc, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                                    .addComponent(rg)
-                                    .addComponent(cpfLogin)
-                                    .addComponent(telefone)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(104, 104, 104)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelSenha)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(senha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(confirmSenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 37, Short.MAX_VALUE)))
+                                .addComponent(bCancela)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bConfirma))
+                            .addComponent(confirmSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelSenha)
+                            .addComponent(labelCPF))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(senha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cpfLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTel)
+                .addGap(100, 100, 100)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(labelDataNasc)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelRG)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(labelCPF))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelNome))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(rg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(cpfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCPF)
+                    .addComponent(cpfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTel)
-                    .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
+                    .addComponent(labelSenha)
+                    .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelSenha))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(confirmSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel2)
+                    .addComponent(confirmSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bCancela)
                     .addComponent(bConfirma))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -196,48 +135,48 @@ public class UICadastroUser extends javax.swing.JFrame {
         PersistenciaUsuario bdUsuario = new PersistenciaUsuario();
         Pessoa pessoaUser = null;
         Usuario u = null ;
+        /*Tenta recuperar dados do CPF passado, vendo se a pessoa possui cadastro na GVBUS*/
         try{
             pessoaUser = pessoaGV.recuperaDadosPessoa(Integer.parseInt(cpfLogin.getText()));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(pessoaUser != null){
+        if(pessoaUser == null){
+            JOptionPane.showMessageDialog(rootPane, "CPF não cadastrado no site da GVBus, impossível realizar cadastro");
+            return;
+        }else{
             u = new Usuario();
             u.setCpf(pessoaUser.getCpf());
-        }
-        
-        
-        
-        if(senha.getText().equals(confirmSenha.getText())){
-            try {
-                u.setSenha(senha.getText());
-            } catch (Exception ex){
-                JOptionPane.showMessageDialog(null,ex.getMessage());
+            u.setDataNascimento(pessoaUser.getDataNascimento());
+            u.setNome(pessoaUser.getNome());
+            u.setRG(pessoaUser.getRG());
+            u.setTelefone(pessoaUser.getTelefone());
+
+            /*Tratamento para confirmação de senha*/
+            if(senha.getText().equals(confirmSenha.getText())){
+                try {
+                    u.setSenha(senha.getText());
+                } catch (Exception ex){
+                    JOptionPane.showMessageDialog(null,ex.getMessage());
+                    return;
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Senhas não conferem.");
                 return;
             }
-            u.setDataNascimento(dataNasc.getText());
-            u.setNome(nome.getText());
-            u.setRG(Integer.parseInt(rg.getText()));
-            u.setTelefone(telefone.getText());
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Senhas não conferem.");
-            return;
-        }
-        
-        bdUsuario.salvaUsuario(u);
-        TelaInicial firstTela = new TelaInicial();
-        firstTela.setVisible(true);
-        this.dispose();
+
+            bdUsuario.salvaUsuario(u);
+            JOptionPane.showMessageDialog(rootPane, "Cadastro feito com sucesso!");
+            TelaInicial firstTela = new TelaInicial();
+            firstTela.setVisible(true);
+            this.dispose();
+         }
     }//GEN-LAST:event_bConfirmaActionPerformed
 
     private void bCancelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelaActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_bCancelaActionPerformed
-
-    private void telefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_telefoneActionPerformed
 
     /**
      * @param args the command line arguments
@@ -279,18 +218,10 @@ public class UICadastroUser extends javax.swing.JFrame {
     private javax.swing.JButton bConfirma;
     private javax.swing.JPasswordField confirmSenha;
     private javax.swing.JTextField cpfLogin;
-    private javax.swing.JTextField dataNasc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel labelCPF;
-    private javax.swing.JLabel labelDataNasc;
-    private javax.swing.JLabel labelNome;
-    private javax.swing.JLabel labelRG;
     private javax.swing.JLabel labelSenha;
-    private javax.swing.JLabel lblTel;
-    private javax.swing.JTextField nome;
-    private javax.swing.JTextField rg;
     private javax.swing.JPasswordField senha;
-    private javax.swing.JTextField telefone;
     // End of variables declaration//GEN-END:variables
 }

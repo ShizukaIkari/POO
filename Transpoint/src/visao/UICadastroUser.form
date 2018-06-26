@@ -26,66 +26,38 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="bCancela" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="bConfirma" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace pref="2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="labelDataNasc" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelCPF" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="labelNome" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="labelRG" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="nome" alignment="0" pref="204" max="32767" attributes="0"/>
-                                  <Component id="dataNasc" alignment="0" pref="204" max="32767" attributes="0"/>
-                                  <Component id="rg" max="32767" attributes="0"/>
-                                  <Component id="cpfLogin" max="32767" attributes="0"/>
-                                  <Component id="telefone" alignment="0" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="bCancela" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="bConfirma" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="labelSenha" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace pref="29" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="senha" alignment="1" min="-2" pref="204" max="-2" attributes="0"/>
-                                  <Component id="confirmSenha" alignment="1" min="-2" pref="204" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="confirmSenha" min="-2" pref="204" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="37" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="labelSenha" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelCPF" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="senha" alignment="1" min="-2" pref="204" max="-2" attributes="0"/>
+                          <Component id="cpfLogin" alignment="1" min="-2" pref="204" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblTel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -93,52 +65,29 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
-                      <Component id="labelDataNasc" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="labelRG" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="labelCPF" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="nome" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="dataNasc" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Component id="rg" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                      <Component id="cpfLogin" min="-2" max="-2" attributes="0"/>
-                  </Group>
+              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="labelCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cpfLogin" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblTel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="telefone" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="senha" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="labelSenha" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="senha" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="confirmSenha" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="confirmSenha" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace pref="83" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="bCancela" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="bConfirma" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="33" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -152,21 +101,6 @@
         <Property name="text" type="java.lang.String" value="Cadastro de Usu&#xe1;rio"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="labelNome">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Nome Completo:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="labelDataNasc">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Data de Nascimento:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="labelRG">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="RG:"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="labelCPF">
       <Properties>
         <Property name="text" type="java.lang.String" value="CPF:"/>
@@ -176,12 +110,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Defina uma senha:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="nome">
-    </Component>
-    <Component class="javax.swing.JTextField" name="dataNasc">
-    </Component>
-    <Component class="javax.swing.JTextField" name="rg">
     </Component>
     <Component class="javax.swing.JTextField" name="cpfLogin">
     </Component>
@@ -209,16 +137,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="confirmSenha">
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblTel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Telefone:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="telefone">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="telefoneActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

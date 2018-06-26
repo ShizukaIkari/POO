@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.cartao.Cartao;
+import modelo.usuario.Pessoa;
 import modelo.usuario.Usuario;
-import persistencia.transpoint.PersistenciaCartao;
 
 
 /**
@@ -65,12 +65,13 @@ public class PersistenciaUsuario {
         p.salvaPessoa(u);
         this.executeSQL(sql);
     }
-    
+    // Um usuário precisa necessariamente de uma pessoa
     public Usuario recuperaUsuario(int cpfUser) throws SQLException{
         String sql = "SELECT * FROM usuario WHERE cpf = "+cpfUser;
         Connection connection = null;
         Statement stament = null;
         PersistenciaCartao persCard = new PersistenciaCartao();
+        PersistenciaPessoa persPessoa = new PersistenciaPessoa();
         
         try{
             Class.forName("org.sqlite.JDBC");
@@ -79,10 +80,17 @@ public class PersistenciaUsuario {
             ResultSet rs = stament.executeQuery(sql);
             Usuario user =null;
             while(rs.next()){
+                Pessoa pUsuario = persPessoa.recuperaDadosPessoa(cpfUser);
                 user=new Usuario();
                 ArrayList<Cartao> cartoes;
-                user.setSenha(rs.getString("senha"));
+                
                 user.setCpf(cpfUser);
+                user.setSenha(rs.getString("senha"));
+                user.setDataNascimento(pUsuario.getDataNascimento());
+                user.setNome(pUsuario.getNome());
+                user.setTelefone(pUsuario.getTelefone());
+                user.setRG(pUsuario.getRG());
+                
                 cartoes = persCard.recuperaCartoesUsuario(user);
                 user.setCartoesTranscol(cartoes);
             }               

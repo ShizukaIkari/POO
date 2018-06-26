@@ -13,9 +13,7 @@ public class Cartao {
     private boolean disponivel;
     private double saldo;
     private int cpfUser;
-
-    
-  
+ 
     public Cartao(int codigo, boolean disponivel, double saldo, String descricao, int cpfUser){
         this.categoria = new Categoria(descricao);
         this.codigo = codigo;
