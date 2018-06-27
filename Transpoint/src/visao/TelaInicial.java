@@ -5,6 +5,7 @@
  */
 package visao;
 
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import modelo.usuario.Usuario;
 import persistencia.transpoint.PersistenciaUsuario;
@@ -58,6 +59,12 @@ public class TelaInicial extends javax.swing.JFrame {
         });
 
         exibSenha.setText("Senha:");
+
+        senha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                senhaKeyPressed(evt);
+            }
+        });
 
         tSemCadastro.setText("Não possui cadastro?");
 
@@ -146,6 +153,7 @@ public class TelaInicial extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MouseClicked
@@ -181,6 +189,23 @@ public class TelaInicial extends javax.swing.JFrame {
         cadastrar.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_bCadastroActionPerformed
+
+    private void senhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_senhaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            PersistenciaUsuario perUser =new PersistenciaUsuario();
+        Usuario user;
+        /*Verifica se usuário está cadastrado*/
+        try{
+            user = perUser.validaUsuario(Integer.parseInt(loginCPF.getText()),senha.getText());
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            return ;
+        }
+        UITranspoint telaTranspoint = new UITranspoint(user);
+        telaTranspoint.setVisible(true);
+        this.dispose();   
+        }
+    }//GEN-LAST:event_senhaKeyPressed
 
     /**
      * @param args the command line arguments

@@ -16,12 +16,7 @@ public class main{
     public static void main(String args[]) {
     
     TelaInicial inicTranspoint = new TelaInicial();
-    
-    java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                inicTranspoint.setVisible(true);
-            }
-        });
+    inicTranspoint.setVisible(true);
 }
     
     

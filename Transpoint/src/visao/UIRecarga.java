@@ -135,6 +135,7 @@ public class UIRecarga extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
@@ -155,9 +156,10 @@ public class UIRecarga extends javax.swing.JFrame {
             nRecarga.setFormaPagamento("Cartão de Crédito");
         }
         persCard.atualizaCartao(card);
-        this.dispose();
         UITranspoint mainTela = new UITranspoint(bfUser); //reabrimos esta tela para o saldo atualizar na tabela
         mainTela.setVisible(true);
+        this.dispose();
+        
         
     }//GEN-LAST:event_confirmButtonActionPerformed
 

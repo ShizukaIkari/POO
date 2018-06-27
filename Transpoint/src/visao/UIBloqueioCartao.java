@@ -112,6 +112,7 @@ public class UIBloqueioCartao extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSolicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSolicActionPerformed
@@ -126,14 +127,16 @@ public class UIBloqueioCartao extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Seu cartão ficará indisponível no app.");
             solic.pedirBloqueio(this.card,motivo.getText());
             persCard.atualizaCartao(this.card);
-            this.dispose();
+            
             UITranspoint mainTela = new UITranspoint(bfUser); //reabrimos esta tela para o saldo atualizar na tabela
             mainTela.setVisible(true);
+            this.dispose();
         }
     }//GEN-LAST:event_jbSolicActionPerformed
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
         PersistenciaUsuario persUser = new PersistenciaUsuario();
+        System.out.println(card.getCpfUser());
         Usuario bfUser = persUser.recuperaUsuario(card.getCpfUser()); //usuário "anterior"
         UITranspoint mainTela = new UITranspoint(bfUser); //reabre
         mainTela.setVisible(true);

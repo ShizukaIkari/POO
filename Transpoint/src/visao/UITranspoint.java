@@ -205,6 +205,7 @@ public class UITranspoint extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRecargaActionPerformed
@@ -226,7 +227,7 @@ public class UITranspoint extends javax.swing.JFrame {
     private void jbBloqueioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBloqueioActionPerformed
         int iRow = tabelaCartoes.getSelectedRow(); //indice da linha
         if (iRow!=-1){
-            String codigo = tabelaCartoes.getValueAt(iRow, 0)+""; //gambiarra admito
+            String codigo = tabelaCartoes.getValueAt(iRow, 0)+""; 
             int cod = Integer.parseInt(codigo);
 
             UIBloqueioCartao block = new UIBloqueioCartao(cod);

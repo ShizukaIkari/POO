@@ -79,23 +79,21 @@ public class PersistenciaCartao {
          stament = connection.createStatement();
          //executa a query no meu banco de dados
          ResultSet rs = stament.executeQuery(sql);  
-         System.out.println("Antes while");  
+      
          while(rs.next()){
              String cat = rs.getString("categoria");
-             System.out.println("Dentro while");  
+            
              Cartao card = new Cartao(cat);
              card.setCodigo(Integer.parseInt(rs.getString("codigo")));
              card.setSaldo(Double.parseDouble(rs.getString("saldo")));
              card.setDisponivel(Boolean.parseBoolean(rs.getString("disponivel")));
              allCards.add(card);
-             System.out.println("+1 card");  
+           
          }             
          stament.close();
          //fecha a conexao com o banco de dados
          connection.close();
-         
-         
-            
+                  
         } catch (ClassNotFoundException ex) {
                 ex.printStackTrace();
         } catch (SQLException ex) {
@@ -108,7 +106,6 @@ public class PersistenciaCartao {
     }
     
     public void salvaCartao(Cartao card){
-        
         String bool = card.isDisponivel()+"";
         String sql = "INSERT INTO cartao (codigo,cpfUser,categoria,saldo,disponivel)" //BOOLEAN É CAPS ATIVADO!
         +"values (" +
@@ -129,17 +126,19 @@ public class PersistenciaCartao {
          //verifica se as classe da biblioteca existem
          Class.forName("org.sqlite.JDBC");
          //abre a conexao com o  banco de dados
-         connection  =DriverManager.getConnection("jdbc:sqlite:transpoint.db");
+         connection =DriverManager.getConnection("jdbc:sqlite:transpoint.db");
          System.out.println("Banco de dados aberto");   
          stament = connection.createStatement();
          //executa a query no meu banco de dados
-         ResultSet rs = stament.executeQuery(sql);         
+         ResultSet rs = stament.executeQuery(sql);  
+      
          while(rs.next()){
              String cat = rs.getString("categoria");
              Cartao card = new Cartao(cat);
              card.setCodigo(Integer.parseInt(rs.getString("codigo")));
              card.setSaldo(Double.parseDouble(rs.getString("saldo")));
              card.setDisponivel(Boolean.parseBoolean(rs.getString("disponivel")));
+             card.setCpfUser(Integer.parseInt(rs.getString("cpfUser")));
              return card;
          }             
          stament.close();
@@ -165,9 +164,9 @@ public class PersistenciaCartao {
     public void atualizaCartao(Cartao c){
         String d = c.isDisponivel()+"";
         String sql = "UPDATE cartao SET saldo=" 
-        + c.getSaldo()+", disponivel=" 
+        + c.getSaldo()+", disponivel='" 
         + d.toUpperCase()
-        + " WHERE codigo =" + c.getCodigo();
+        + "' WHERE codigo =" + c.getCodigo();
         this.executeSQL(sql);
     }
 
