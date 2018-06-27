@@ -35,7 +35,7 @@ public class Categoria {
                 this.desconto = 0.5;
             }
         }
-        this.setTipo(descricao);       /*ATENÇÃO Não fizemos tratamento de erros no caso "descrição inválida"*/
+        this.setTipo(descricao); 
     }
 
     public boolean isLimiteDiario() {

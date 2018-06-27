@@ -65,7 +65,7 @@ public class PersistenciaUsuario {
         this.executeSQL(sql);
     }
     // Um usuário precisa necessariamente de uma pessoa
-    public Usuario recuperaUsuario(int cpfUser) throws SQLException{
+    public Usuario recuperaUsuario(int cpfUser){
         String sql = "SELECT * FROM usuario WHERE cpf = "+cpfUser;
         Connection connection = null;
         Statement stament = null;
@@ -101,7 +101,6 @@ public class PersistenciaUsuario {
                 ex.printStackTrace();
         } catch (SQLException ex) {
                 ex.printStackTrace();
-                throw ex;
         } catch (Exception ex) {
             Logger.getLogger(PersistenciaCartao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -153,6 +152,13 @@ public class PersistenciaUsuario {
         return user;
         
         
+    }
+    
+    public void atualizaUsuario(Usuario u){
+        String sql = "UPDATE usuario SET senha=" 
+        + u.getSenha()
+        + " WHERE cpf =" + u.getCpf();
+        this.executeSQL(sql);
     }
     
 }

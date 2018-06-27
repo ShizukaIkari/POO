@@ -6,10 +6,13 @@
 package visao;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.cartao.Cartao;
+import modelo.pagamento.Tarifa;
 import modelo.usuario.Usuario;
 import persistencia.transpoint.PersistenciaCartao;
+import persistencia.transpoint.PersistenciaTarifa;
 
 /**
  *
@@ -62,9 +65,6 @@ public class UITranspoint extends javax.swing.JFrame {
     /**
      * Creates new form UITranspoint
      */
-    public UITranspoint(){
-        initComponents();
-    }
     public UITranspoint(Usuario user) {
         this.user = user;
         initComponents();
@@ -87,12 +87,13 @@ public class UITranspoint extends javax.swing.JFrame {
         tabelaCartoes = new javax.swing.JTable();
         jbRecarga = new javax.swing.JButton();
         jbBloqueio = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        lblCartoes = new javax.swing.JLabel();
+        jbTarifa = new javax.swing.JButton();
+        menuOpcoes = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jmTrocaSenha = new javax.swing.JMenuItem();
+        jmHistorico = new javax.swing.JMenuItem();
+        jmLogout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -125,22 +126,40 @@ public class UITranspoint extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Cartões Cadastrados:");
+        lblCartoes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblCartoes.setText("Cartões Cadastrados:");
 
-        jButton1.setText("Histórico");
+        jbTarifa.setText("Pagar Passagem");
 
         jMenu2.setText("Opções");
 
-        jMenuItem1.setText("Trocar Senha");
-        jMenu2.add(jMenuItem1);
+        jmTrocaSenha.setText("Trocar Senha");
+        jmTrocaSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmTrocaSenhaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmTrocaSenha);
 
-        jMenuItem2.setText("Sair");
-        jMenu2.add(jMenuItem2);
+        jmHistorico.setText("Exibir Histórico");
+        jmHistorico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmHistoricoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmHistorico);
 
-        jMenuBar1.add(jMenu2);
+        jmLogout.setText("Sair");
+        jmLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmLogoutActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmLogout);
 
-        setJMenuBar(jMenuBar1);
+        menuOpcoes.add(jMenu2);
+
+        setJMenuBar(menuOpcoes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -156,13 +175,13 @@ public class UITranspoint extends javax.swing.JFrame {
                         .addComponent(nomeUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCartoes, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jbRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jbBloqueio, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jbTarifa, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -174,14 +193,14 @@ public class UITranspoint extends javax.swing.JFrame {
                     .addComponent(labelGreetings)
                     .addComponent(nomeUser, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
-                .addComponent(jLabel1)
+                .addComponent(lblCartoes)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbRecarga)
                     .addComponent(jbBloqueio)
-                    .addComponent(jButton1))
+                    .addComponent(jbTarifa))
                 .addGap(45, 45, 45))
         );
 
@@ -189,16 +208,52 @@ public class UITranspoint extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRecargaActionPerformed
-        // TODO add your handling code here:
-        UIRecarga recharge = new UIRecarga();
-        recharge.setVisible(true);
+        int iRow = tabelaCartoes.getSelectedRow(); //indice da linha
+        
+        if(iRow != -1){
+            String codigo = tabelaCartoes.getValueAt(iRow, 0)+""; //gambiarra admito
+            int cod = Integer.parseInt(codigo);
+            UIRecarga recharge = new UIRecarga(cod);
+            recharge.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um cartão.");
+            return;
+        }
+        
     }//GEN-LAST:event_jbRecargaActionPerformed
 
     private void jbBloqueioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBloqueioActionPerformed
-        // TODO add your handling code here:
-        UIBloqueioCartao block = new UIBloqueioCartao();
-        block.setVisible(true);
+        int iRow = tabelaCartoes.getSelectedRow(); //indice da linha
+        if (iRow!=-1){
+            String codigo = tabelaCartoes.getValueAt(iRow, 0)+""; //gambiarra admito
+            int cod = Integer.parseInt(codigo);
+
+            UIBloqueioCartao block = new UIBloqueioCartao(cod);
+            block.setVisible(true);
+            this.dispose();
+        } else{
+            JOptionPane.showMessageDialog(rootPane, "Selecione um cartão.");
+            return;
+        }
+        
     }//GEN-LAST:event_jbBloqueioActionPerformed
+
+    private void jmHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmHistoricoActionPerformed
+        HistoricoUsuario histUser = new HistoricoUsuario(this.user);
+        histUser.setVisible(true);
+    }//GEN-LAST:event_jmHistoricoActionPerformed
+
+    private void jmLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmLogoutActionPerformed
+        TelaInicial inicial = new TelaInicial();
+        inicial.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jmLogoutActionPerformed
+
+    private void jmTrocaSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmTrocaSenhaActionPerformed
+        UITrocarSenha change = new UITrocarSenha(user);
+        change.setVisible(true);
+    }//GEN-LAST:event_jmTrocaSenhaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,26 +281,28 @@ public class UITranspoint extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(UITranspoint.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        Usuario exibU = new Usuario();
+        exibU.setNome("Test User");
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UITranspoint().setVisible(true);
+                new UITranspoint(exibU).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbBloqueio;
     private javax.swing.JButton jbRecarga;
+    private javax.swing.JButton jbTarifa;
+    private javax.swing.JMenuItem jmHistorico;
+    private javax.swing.JMenuItem jmLogout;
+    private javax.swing.JMenuItem jmTrocaSenha;
     private javax.swing.JLabel labelGreetings;
+    private javax.swing.JLabel lblCartoes;
+    private javax.swing.JMenuBar menuOpcoes;
     private javax.swing.JLabel nomeUser;
     private javax.swing.JTable tabelaCartoes;
     // End of variables declaration//GEN-END:variables

@@ -14,9 +14,7 @@ public class Pessoa {
     public String telefone;
     private int cpf;
     private String dataNascimento;
-    private int rg;
-    private CartaoCredito cartaoCredito = null;
-    
+    private int rg;    
 
     public void setCpf(int cpf) {
         this.cpf = cpf;
@@ -42,16 +40,6 @@ public class Pessoa {
         this.rg = codigo;
     }
     
-    public CartaoCredito getCartaoCredito(){
-        return this.cartaoCredito;
-    }
-    
-    public void setCartaoCredito(int numero, String dataVencimento){
-        this.cartaoCredito.setNumero(numero);
-        this.cartaoCredito.setDataVencimento(dataVencimento);
-        this.cartaoCredito.setTitular(this);
-    }
-
     public String getNome() {
         return nome;
     }

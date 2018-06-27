@@ -11,7 +11,9 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.cartao.BloqueioCartao;
 import modelo.cartao.Cartao;
+import modelo.usuario.Usuario;
 import persistencia.transpoint.PersistenciaCartao;
+import persistencia.transpoint.PersistenciaUsuario;
 
 /**
  *
@@ -22,7 +24,20 @@ public class UIBloqueioCartao extends javax.swing.JFrame {
     /**
      * Creates new form UIBloqueioCartao
      */
-    public UIBloqueioCartao() {
+    private Cartao card;
+
+    public Cartao getCard() {
+        return card;
+    }
+
+    public void setCard(Cartao card) {
+        this.card = card;
+    }
+    
+    
+    public UIBloqueioCartao(int codCard) {
+        PersistenciaCartao persC = new PersistenciaCartao();
+        this.card = persC.recuperaCartao(codCard);
         initComponents();
     }
 
@@ -35,18 +50,15 @@ public class UIBloqueioCartao extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lbCodCard = new javax.swing.JLabel();
-        codCartao = new javax.swing.JTextField();
         lbMotivo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         motivo = new javax.swing.JTextArea();
         jbSolic = new javax.swing.JButton();
+        jbCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lbCodCard.setText("Insira o código do cartão que deseja bloquear:");
-
-        lbMotivo.setText("Motivo:");
+        lbMotivo.setText("Informe o motivo do bloqueio:");
 
         motivo.setColumns(20);
         motivo.setRows(5);
@@ -59,34 +71,44 @@ public class UIBloqueioCartao extends javax.swing.JFrame {
             }
         });
 
+        jbCancelar.setText("Cancelar");
+        jbCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jbSolic)
-                    .addComponent(lbMotivo, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbCodCard, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(codCartao, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbMotivo)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jbSolic)))
+                        .addGap(0, 18, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(lbCodCard)
-                .addGap(18, 18, 18)
-                .addComponent(codCartao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(26, 26, 26)
                 .addComponent(lbMotivo)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addComponent(jbSolic)
-                .addGap(22, 22, 22))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbSolic)
+                    .addComponent(jbCancelar))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         pack();
@@ -95,18 +117,28 @@ public class UIBloqueioCartao extends javax.swing.JFrame {
     private void jbSolicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSolicActionPerformed
         BloqueioCartao solic = new BloqueioCartao();
         PersistenciaCartao persCard = new PersistenciaCartao();
-        Cartao c = null;
+        PersistenciaUsuario persUser = new PersistenciaUsuario();
+        Usuario bfUser = persUser.recuperaUsuario(card.getCpfUser()); //usuário "anterior"
         
-        try {
-            c = persCard.recuperaCartao(Integer.parseInt(codCartao.getText()));
-        } catch (SQLException ex) {
-            Logger.getLogger(UIBloqueioCartao.class.getName()).log(Level.SEVERE, null, ex);
+        if(motivo.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Por favor, especifique o motivo.");
+        } else{
+            JOptionPane.showMessageDialog(null, "Seu cartão ficará indisponível no app.");
+            solic.pedirBloqueio(this.card,motivo.getText());
+            persCard.atualizaCartao(this.card);
+            this.dispose();
+            UITranspoint mainTela = new UITranspoint(bfUser); //reabrimos esta tela para o saldo atualizar na tabela
+            mainTela.setVisible(true);
         }
-        JOptionPane.showMessageDialog(null, "Isto deixará seu cartão indisponível no app, deseja continuar?");
-        solic.pedirBloqueio(c,motivo.getText());
-        persCard.atualizaCartao(c);
-        
     }//GEN-LAST:event_jbSolicActionPerformed
+
+    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+        PersistenciaUsuario persUser = new PersistenciaUsuario();
+        Usuario bfUser = persUser.recuperaUsuario(card.getCpfUser()); //usuário "anterior"
+        UITranspoint mainTela = new UITranspoint(bfUser); //reabre
+        mainTela.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jbCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,20 +166,19 @@ public class UIBloqueioCartao extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(UIBloqueioCartao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        int testeCod = 12345;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UIBloqueioCartao().setVisible(true);
+                new UIBloqueioCartao(testeCod).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField codCartao;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbSolic;
-    private javax.swing.JLabel lbCodCard;
     private javax.swing.JLabel lbMotivo;
     private javax.swing.JTextArea motivo;
     // End of variables declaration//GEN-END:variables

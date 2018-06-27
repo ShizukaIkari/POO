@@ -43,8 +43,13 @@ public class Cartao {
     }
 
     //Saldo vai ser descontado de tarifa (passar valor negativo) ou recarregado por recarga.
-    public void setSaldo(double valor){
-        this.saldo += valor;
+    public void setSaldo(double valor) throws Exception{
+        if ((this.saldo += valor )<0){
+            throw new Exception("Saldo insuficiente");
+        }else{
+            this.saldo += valor;
+        }
+        
     }
     
     public String getTipoCategoria() {
@@ -63,6 +68,10 @@ public class Cartao {
         this.codigo = codigo;
     }
 
+    /*Caso não gratuita, verifica se o saldo consegue pagar a passagem (conside
+    rando possíveis descontos), se não conseguir, torna-se indisponível indepen
+    dente do boolean passado
+    */
     public void setDisponivel(boolean disponivel) {
         Passagem p = new Passagem();
         if(this.categoria.isGratuita()){

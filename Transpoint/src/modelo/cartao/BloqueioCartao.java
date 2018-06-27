@@ -28,6 +28,5 @@ public class BloqueioCartao {
         dataHora = dateFormat.format(data);
         motivo = reason;
         card.setDisponivel(false);
-        /*Guardar no banco de dados: saldo do cartão, código, disponibilidade, data e hora ?, motivo*/
     }
 }

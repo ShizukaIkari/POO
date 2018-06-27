@@ -133,7 +133,7 @@ public class UICadastroUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConfirmaActionPerformed
-        PersistenciaCartao cartoesUser = new PersistenciaCartao();
+        
         PersistenciaPessoa pessoaGV = new PersistenciaPessoa();
         PersistenciaUsuario bdUsuario = new PersistenciaUsuario();
         Pessoa pessoaUser = null;
@@ -150,16 +150,11 @@ public class UICadastroUser extends javax.swing.JFrame {
         }else{
             u = new Usuario();
             u.setCpf(pessoaUser.getCpf());
-            u.setDataNascimento(pessoaUser.getDataNascimento());
-            u.setNome(pessoaUser.getNome());
-            u.setRG(pessoaUser.getRG());
-            u.setTelefone(pessoaUser.getTelefone());
-            u.setCartoesTranscol(cartoesUser.recuperaCartoesUsuario(u));
-           
+                       
             /*Tratamento para confirmação de senha*/
             if(senha.getText().equals(confirmSenha.getText())){
                 try {
-                    u.setSenha(senha.getText());
+                    u.setSenha(senha.getText());    //Senha não pode ser vazia
                 } catch (Exception ex){
                     JOptionPane.showMessageDialog(null,ex.getMessage());
                     return;
@@ -169,7 +164,7 @@ public class UICadastroUser extends javax.swing.JFrame {
                 return;
             }
             
-            bdUsuario.salvaUsuario(u);
+            bdUsuario.salvaUsuario(u);      //Registra usuário no BD
             JOptionPane.showMessageDialog(rootPane, "Cadastro feito com sucesso!");
             TelaInicial firstTela = new TelaInicial();
             firstTela.setVisible(true);

@@ -11,7 +11,9 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.cartao.Cartao;
 import modelo.pagamento.Recarga;
+import modelo.usuario.Usuario;
 import persistencia.transpoint.PersistenciaCartao;
+import persistencia.transpoint.PersistenciaUsuario;
 
 /**
  *
@@ -22,7 +24,20 @@ public class UIRecarga extends javax.swing.JFrame {
     /**
      * Creates new form UIRecarga
      */
-    public UIRecarga() {
+    private Cartao card;
+
+    public Cartao getCard() {
+        return card;
+    }
+
+    public void setCard(Cartao card) {
+        this.card = card;
+    }
+        
+    
+    public UIRecarga(int codCard) {
+        PersistenciaCartao persC = new PersistenciaCartao();
+        this.card = persC.recuperaCartao(codCard);
         initComponents();
     }
 
@@ -38,13 +53,11 @@ public class UIRecarga extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         opBoleto = new javax.swing.JRadioButton();
         opCartaoCredito = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
-        txtValor = new javax.swing.JLabel();
+        lbMetodoPag = new javax.swing.JLabel();
+        lbValor = new javax.swing.JLabel();
         confirmButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         valorRecarga = new javax.swing.JTextField();
-        lbCodCard = new javax.swing.JLabel();
-        codCard = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(600, 250));
@@ -57,11 +70,11 @@ public class UIRecarga extends javax.swing.JFrame {
         opCartaoCredito.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         opCartaoCredito.setText("Cartão de Crédito");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Selecione o método de pagamento");
+        lbMetodoPag.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbMetodoPag.setText("Selecione o método de pagamento");
 
-        txtValor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtValor.setText("Valor:");
+        lbValor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbValor.setText("Valor:");
 
         confirmButton.setText("OK");
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
@@ -77,9 +90,6 @@ public class UIRecarga extends javax.swing.JFrame {
             }
         });
 
-        lbCodCard.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lbCodCard.setText("Código Cartão:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,45 +97,41 @@ public class UIRecarga extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 165, Short.MAX_VALUE)
-                        .addComponent(cancelButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(confirmButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(codCard, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(opBoleto)
-                            .addComponent(jLabel1)
+                            .addComponent(lbMetodoPag)
                             .addComponent(opCartaoCredito)
-                            .addComponent(lbCodCard)
-                            .addComponent(txtValor)
-                            .addComponent(valorRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbValor)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(valorRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(cancelButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(confirmButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbCodCard)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(codCard, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbMetodoPag)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(opBoleto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(opCartaoCredito)
                 .addGap(18, 18, 18)
-                .addComponent(txtValor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(valorRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(valorRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbValor))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirmButton)
                     .addComponent(cancelButton))
-                .addContainerGap())
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -134,17 +140,10 @@ public class UIRecarga extends javax.swing.JFrame {
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         Recarga nRecarga;
         PersistenciaCartao persCard = new PersistenciaCartao();
-        Cartao card = null;
-        
+        PersistenciaUsuario persUser = new PersistenciaUsuario();
+        Usuario bfUser = persUser.recuperaUsuario(card.getCpfUser()); //usuário "anterior"
         try {
-             card = persCard.recuperaCartao(Integer.parseInt(codCard.getText()));
-        } catch (SQLException ex) {
-            Logger.getLogger(UIRecarga.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        try {
-            nRecarga = new Recarga(card,Double.parseDouble(valorRecarga.getText()));
+            nRecarga = new Recarga(this.card,Double.parseDouble(valorRecarga.getText()));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             return;
@@ -152,17 +151,21 @@ public class UIRecarga extends javax.swing.JFrame {
        
         if(opBoleto.isSelected()){
             nRecarga.setFormaPagamento("Boleto");
-            // ~ alguma função pra "gerar" um boleto fictício aqui? Dando a opção de imprimir
         } else if (opCartaoCredito.isSelected()) {
             nRecarga.setFormaPagamento("Cartão de Crédito");
-            // Abrir uma janela para cadastrar um cartão 
         }
         persCard.atualizaCartao(card);
         this.dispose();
+        UITranspoint mainTela = new UITranspoint(bfUser); //reabrimos esta tela para o saldo atualizar na tabela
+        mainTela.setVisible(true);
         
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        PersistenciaUsuario persUser = new PersistenciaUsuario();
+        Usuario bfUser = persUser.recuperaUsuario(card.getCpfUser()); //usuário "anterior"
+        UITranspoint mainTela = new UITranspoint(bfUser); //reabre
+        mainTela.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -192,11 +195,11 @@ public class UIRecarga extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(UIRecarga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        int testeCod = 12345;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UIRecarga().setVisible(true);
+                new UIRecarga(testeCod).setVisible(true);
             }
         });
     }
@@ -204,13 +207,11 @@ public class UIRecarga extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JTextField codCard;
     private javax.swing.JButton confirmButton;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lbCodCard;
+    private javax.swing.JLabel lbMetodoPag;
+    private javax.swing.JLabel lbValor;
     private javax.swing.JRadioButton opBoleto;
     private javax.swing.JRadioButton opCartaoCredito;
-    private javax.swing.JLabel txtValor;
     private javax.swing.JTextField valorRecarga;
     // End of variables declaration//GEN-END:variables
 }

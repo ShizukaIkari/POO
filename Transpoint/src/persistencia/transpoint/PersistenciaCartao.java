@@ -120,13 +120,13 @@ public class PersistenciaCartao {
         this.executeSQL(sql);
     }
     
-    public Cartao recuperaCartao(int codigo) throws SQLException{
+    public Cartao recuperaCartao(int codigo){
         String sql ="SELECT * FROM cartao WHERE codigo = " + codigo;
         Connection connection = null;
         Statement stament = null;
         
         try {
-            //verifica se as classe da biblioteca existem
+         //verifica se as classe da biblioteca existem
          Class.forName("org.sqlite.JDBC");
          //abre a conexao com o  banco de dados
          connection  =DriverManager.getConnection("jdbc:sqlite:transpoint.db");
@@ -152,7 +152,6 @@ public class PersistenciaCartao {
                 ex.printStackTrace();
         } catch (SQLException ex) {
                 ex.printStackTrace();
-                throw ex;
         } catch (Exception ex) {
             Logger.getLogger(PersistenciaCartao.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -158,10 +158,9 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void bLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLogarActionPerformed
-        // TODO add your handling code here:
-        
         PersistenciaUsuario perUser =new PersistenciaUsuario();
         Usuario user;
+        /*Verifica se usuário está cadastrado*/
         try{
             user = perUser.validaUsuario(Integer.parseInt(loginCPF.getText()),senha.getText());
         } catch (Exception e){
@@ -174,12 +173,10 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_bLogarActionPerformed
 
     private void exibLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exibLoginMouseEntered
-        // TODO add your handling code here:
         JOptionPane.showMessageDialog(rootPane, "Seu próprio CPF é seu login!");
     }//GEN-LAST:event_exibLoginMouseEntered
 
     private void bCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastroActionPerformed
-        // TODO add your handling code here:
         UICadastroUser cadastrar = new UICadastroUser();
         cadastrar.setVisible(true);
         this.dispose();
