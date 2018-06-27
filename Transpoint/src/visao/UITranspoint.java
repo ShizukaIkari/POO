@@ -43,6 +43,7 @@ public class UITranspoint extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
         for (Cartao card: cartoes){
+            
             String disponibilidade;
             if(card.isDisponivel()){
                 disponibilidade="Disponível";
@@ -235,6 +236,7 @@ public class UITranspoint extends javax.swing.JFrame {
             this.dispose();
         } else{
             JOptionPane.showMessageDialog(rootPane, "Selecione um cartão.");
+            
             return;
         }
         
