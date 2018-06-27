@@ -43,12 +43,8 @@ public class Cartao {
     }
 
     //Saldo vai ser descontado de tarifa (passar valor negativo) ou recarregado por recarga.
-    public void setSaldo(double valor) throws Exception {
-        if(this.saldo + valor > 0){
-            this.saldo += valor;
-        } else {
-            throw new Exception("Saldo insuficiente.");
-        }
+    public void setSaldo(double valor){
+        this.saldo += valor;
     }
     
     public String getTipoCategoria() {

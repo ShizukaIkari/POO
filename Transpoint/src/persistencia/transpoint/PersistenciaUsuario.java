@@ -57,12 +57,11 @@ public class PersistenciaUsuario {
     }
     //Salva usuário no banco
     public void salvaUsuario(Usuario u){
-        PersistenciaPessoa p = new PersistenciaPessoa();
+       
         String sql = "INSERT INTO usuario (cpf,senha)"
         +"values (" +
         u.getCpf()+",'"+
         u.getSenha()+"')";
-        p.salvaPessoa(u);
         this.executeSQL(sql);
     }
     // Um usuário precisa necessariamente de uma pessoa

@@ -64,7 +64,7 @@ public class PersistenciaCartao {
     
     
     //Retorna uma lista com todos os cartões disponíveis associados ao usuário
-    public ArrayList<Cartao> recuperaCartoesUsuario(Usuario u) throws SQLException{
+    public ArrayList<Cartao> recuperaCartoesUsuario(Usuario u){
         ArrayList<Cartao> allCards = new ArrayList<>();
         String sql ="SELECT * FROM cartao WHERE cpfUser = " + u.getCpf();
         Connection connection = null;
@@ -75,18 +75,20 @@ public class PersistenciaCartao {
          Class.forName("org.sqlite.JDBC");
          //abre a conexao com o  banco de dados
          connection  =DriverManager.getConnection("jdbc:sqlite:transpoint.db");
-         System.out.println("Banco de dados aberto");   
+         System.out.println("Banco cartao aberto");   
          stament = connection.createStatement();
          //executa a query no meu banco de dados
-         ResultSet rs = stament.executeQuery(sql);         
+         ResultSet rs = stament.executeQuery(sql);  
+         System.out.println("Antes while");  
          while(rs.next()){
              String cat = rs.getString("categoria");
-             
+             System.out.println("Dentro while");  
              Cartao card = new Cartao(cat);
              card.setCodigo(Integer.parseInt(rs.getString("codigo")));
              card.setSaldo(Double.parseDouble(rs.getString("saldo")));
              card.setDisponivel(Boolean.parseBoolean(rs.getString("disponivel")));
              allCards.add(card);
+             System.out.println("+1 card");  
          }             
          stament.close();
          //fecha a conexao com o banco de dados
@@ -98,7 +100,6 @@ public class PersistenciaCartao {
                 ex.printStackTrace();
         } catch (SQLException ex) {
                 ex.printStackTrace();
-                throw ex;
         } catch (Exception ex) {
             Logger.getLogger(PersistenciaCartao.class.getName()).log(Level.SEVERE, null, ex);
         }

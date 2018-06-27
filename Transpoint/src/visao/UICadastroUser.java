@@ -5,6 +5,9 @@
  */
 package visao;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.usuario.Pessoa;
 import modelo.usuario.Usuario;
@@ -151,7 +154,8 @@ public class UICadastroUser extends javax.swing.JFrame {
             u.setNome(pessoaUser.getNome());
             u.setRG(pessoaUser.getRG());
             u.setTelefone(pessoaUser.getTelefone());
-
+            u.setCartoesTranscol(cartoesUser.recuperaCartoesUsuario(u));
+           
             /*Tratamento para confirmação de senha*/
             if(senha.getText().equals(confirmSenha.getText())){
                 try {
@@ -164,7 +168,7 @@ public class UICadastroUser extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Senhas não conferem.");
                 return;
             }
-
+            
             bdUsuario.salvaUsuario(u);
             JOptionPane.showMessageDialog(rootPane, "Cadastro feito com sucesso!");
             TelaInicial firstTela = new TelaInicial();
