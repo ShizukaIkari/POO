@@ -111,7 +111,7 @@ public class PersistenciaUsuario {
         
     }
     
-    public Usuario validaUsuario(int cpfUser, String senha) throws SQLException{
+    public Usuario validaUsuario(int cpfUser, String senha) throws SQLException, Exception{
         String sql = "SELECT * FROM usuario WHERE cpf = "+cpfUser;
         boolean inside=false;
         Connection connection = null;
@@ -149,6 +149,7 @@ public class PersistenciaUsuario {
                 throw ex;
         } catch (Exception ex) {
             Logger.getLogger(PersistenciaCartao.class.getName()).log(Level.SEVERE, null, ex);
+             throw ex;
         }
         return user;
         
