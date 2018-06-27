@@ -40,11 +40,19 @@ public class UITranspoint extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
         for (Cartao card: cartoes){
+            String disponibilidade;
+            if(card.isDisponivel()){
+                disponibilidade="Disponível";
+            }
+            else{
+                disponibilidade="Indisponível";
+            }
             tableCards.addRow(new Object[] {
                 card.getCodigo(),
                 card.getCategoria().getTipo(),
                 card.getSaldo(),
-                card.isDisponivel()
+                disponibilidade
+                    
             });
         }
         
