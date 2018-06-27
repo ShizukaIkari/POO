@@ -109,9 +109,7 @@ public class UITranspoint extends javax.swing.JFrame {
                 "Código", "Categoria", "Saldo", "Disponibilidade"
             }
         ));
-        tabelaCartoes.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(tabelaCartoes);
-        tabelaCartoes.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jbRecarga.setText("Recarregar");
         jbRecarga.addActionListener(new java.awt.event.ActionListener() {
