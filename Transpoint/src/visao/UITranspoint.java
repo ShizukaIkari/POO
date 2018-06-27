@@ -131,6 +131,11 @@ public class UITranspoint extends javax.swing.JFrame {
         lblCartoes.setText("Cartões Cadastrados:");
 
         jbTarifa.setText("Pagar Passagem");
+        jbTarifa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbTarifaActionPerformed(evt);
+            }
+        });
 
         jMenu2.setText("Opções");
 
@@ -257,6 +262,22 @@ public class UITranspoint extends javax.swing.JFrame {
         UITrocarSenha change = new UITrocarSenha(user);
         change.setVisible(true);
     }//GEN-LAST:event_jmTrocaSenhaActionPerformed
+
+    private void jbTarifaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTarifaActionPerformed
+       int iRow = tabelaCartoes.getSelectedRow(); //indice da linha
+        
+        if(iRow != -1){
+            JOptionPane.showMessageDialog(rootPane, "Estou mexendo, relaxa");
+            /*
+            String codigo = tabelaCartoes.getValueAt(iRow, 0)+""; //gambiarra admito
+            int cod = Integer.parseInt(codigo);
+            */
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um cartão.");
+            return;
+        }
+    }//GEN-LAST:event_jbTarifaActionPerformed
 
     /**
      * @param args the command line arguments
