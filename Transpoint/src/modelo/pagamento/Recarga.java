@@ -19,13 +19,15 @@ public class Recarga {
     private String dataHoraRecarga; //Salvando hora e data da recarga
     private String formaPagamento;
     
-    /*public Recarga(Cartao c) throws Exception{
+    public Recarga(Cartao c, double val) throws Exception{
         if((c.getCategoria().isGratuita())){
             throw new Exception("Categorias gratuitas não recebem recarga.");
         } else{
             setDataRecarga();
+            this.valor = val;
+            c.setSaldo(this.valor);
         }
-    }*/ 
+    }
     
     public double getValor() {
         return valor;

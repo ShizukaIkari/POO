@@ -3,10 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Serenna/Documents/GitHub/POO1/Transpoint/src/persistencia/transpoint/PersistenciaCartao.java</file>
             <file>file:/C:/Users/Serenna/Documents/GitHub/POO1/Transpoint/src/visao/TelaInicial.java</file>
+            <file>file:/C:/Users/Serenna/Documents/GitHub/POO1/Transpoint/src/modelo/pagamento/Recarga.java</file>
             <file>file:/C:/Users/Serenna/Documents/GitHub/POO1/Transpoint/src/modelo/cartao/Cartao.java</file>
+            <file>file:/C:/Users/Serenna/Documents/GitHub/POO1/Transpoint/src/visao/UIBloqueioCartao.java</file>
+            <file>file:/C:/Users/Serenna/Documents/GitHub/POO1/Transpoint/src/visao/UIPagamentoPassagem.java</file>
             <file>file:/C:/Users/Serenna/Documents/GitHub/POO1/Transpoint/src/visao/UITranspoint.java</file>
             <file>file:/C:/Users/Serenna/Documents/GitHub/POO1/Transpoint/src/visao/UICadastroUser.java</file>
+            <file>file:/C:/Users/Serenna/Documents/GitHub/POO1/Transpoint/src/modelo/cartao/BloqueioCartao.java</file>
             <file>file:/C:/Users/Serenna/Documents/GitHub/POO1/Transpoint/src/visao/UIRecarga.java</file>
         </group>
     </open-files>

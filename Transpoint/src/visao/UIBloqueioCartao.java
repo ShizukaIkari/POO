@@ -104,7 +104,8 @@ public class UIBloqueioCartao extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(null, "Isto deixará seu cartão indisponível no app, deseja continuar?");
         solic.pedirBloqueio(c,motivo.getText());
-        //PeristenciaCartao.atualizaCartao() → implementar função para att BD
+        persCard.atualizaCartao(c);
+        
     }//GEN-LAST:event_jbSolicActionPerformed
 
     /**

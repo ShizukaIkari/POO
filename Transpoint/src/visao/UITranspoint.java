@@ -80,9 +80,11 @@ public class UITranspoint extends javax.swing.JFrame {
         jbRecarga = new javax.swing.JButton();
         jbBloqueio = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,19 +101,37 @@ public class UITranspoint extends javax.swing.JFrame {
                 "Código", "Categoria", "Saldo", "Disponibilidade"
             }
         ));
+        tabelaCartoes.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(tabelaCartoes);
+        tabelaCartoes.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jbRecarga.setText("Recarregar");
+        jbRecarga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbRecargaActionPerformed(evt);
+            }
+        });
 
         jbBloqueio.setText("Solicitar Bloqueio");
+        jbBloqueio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBloqueioActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Cartões Cadastrados:");
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        jButton1.setText("Histórico");
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Opções");
+
+        jMenuItem1.setText("Trocar Senha");
+        jMenu2.add(jMenuItem1);
+
+        jMenuItem2.setText("Sair");
+        jMenu2.add(jMenuItem2);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -130,12 +150,13 @@ public class UITranspoint extends javax.swing.JFrame {
                         .addComponent(nomeUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(jbRecarga)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbBloqueio))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jbRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jbBloqueio, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -153,12 +174,25 @@ public class UITranspoint extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbRecarga)
-                    .addComponent(jbBloqueio))
+                    .addComponent(jbBloqueio)
+                    .addComponent(jButton1))
                 .addGap(45, 45, 45))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRecargaActionPerformed
+        // TODO add your handling code here:
+        UIRecarga recharge = new UIRecarga();
+        recharge.setVisible(true);
+    }//GEN-LAST:event_jbRecargaActionPerformed
+
+    private void jbBloqueioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBloqueioActionPerformed
+        // TODO add your handling code here:
+        UIBloqueioCartao block = new UIBloqueioCartao();
+        block.setVisible(true);
+    }//GEN-LAST:event_jbBloqueioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,10 +230,12 @@ public class UITranspoint extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbBloqueio;
     private javax.swing.JButton jbRecarga;
