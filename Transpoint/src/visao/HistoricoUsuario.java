@@ -22,18 +22,10 @@ public class HistoricoUsuario extends javax.swing.JFrame {
     /**
      * Creates new form HistoricoUsuario
      */
-    private Usuario u;
-
-    public Usuario getU() {
-        return u;
-    }
-
-    public void setU(Usuario u) {
-        this.u = u;
-    }
-        
-    public HistoricoUsuario(Usuario user) {
-        setU(user);
+    private Usuario user;
+    
+    public HistoricoUsuario(Usuario u) {
+        this.user= u;
         initComponents();
     }
     private void atualizaTabela(Usuario u){

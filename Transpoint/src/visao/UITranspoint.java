@@ -214,6 +214,13 @@ public class UITranspoint extends javax.swing.JFrame {
         if(iRow != -1){
             String codigo = tabelaCartoes.getValueAt(iRow, 0)+""; //gambiarra admito
             int cod = Integer.parseInt(codigo);
+            
+            for(Cartao uCartao : user.getCartoes()){
+                if(uCartao.getCodigo() == cod && uCartao.getCategoria().isGratuita()){
+                    JOptionPane.showMessageDialog(rootPane, "Categorias gratuitas não recebem recarga.");
+                    return;
+                }
+            }
             UIRecarga recharge = new UIRecarga(this.user,cod);
             recharge.setVisible(true);
             this.dispose();

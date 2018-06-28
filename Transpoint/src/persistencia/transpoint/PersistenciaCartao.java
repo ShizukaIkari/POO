@@ -111,7 +111,6 @@ public class PersistenciaCartao {
         card.getTipoCategoria()+"',"+
         card.getSaldo()+",'"+
         bool.toUpperCase()+"')";
-        System.out.println("savecard");
         this.executeSQL(sql);
     }
     
@@ -165,7 +164,6 @@ public class PersistenciaCartao {
         + c.getSaldo()+", disponivel='" 
         + d.toUpperCase()
         + "' WHERE codigo =" + c.getCodigo();
-        System.out.println("attcard");
         this.executeSQL(sql);
     }
 

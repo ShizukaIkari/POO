@@ -8,7 +8,6 @@ package modelo.pagamento;
 import java.text.DateFormat;
 import modelo.cartao.Cartao;
 import java.util.Date;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,9 +19,7 @@ public class Recarga {
     private String formaPagamento;
     
     public Recarga(Cartao c, double val) throws Exception{
-        if((c.getCategoria().isGratuita())){
-            throw new Exception("Categorias gratuitas não recebem recarga.");
-        } else if (val<0){
+        if (val<0){
             throw new Exception("Recarga não pode ser negativa");
         }else{
             setDataRecarga();
