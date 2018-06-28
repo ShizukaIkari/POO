@@ -261,20 +261,30 @@ public class UITranspoint extends javax.swing.JFrame {
     int iRow = tabelaCartoes.getSelectedRow(); //indice da linha
     PersistenciaCartao persCard = new PersistenciaCartao();
     PersistenciaTarifa persTar = new PersistenciaTarifa();
-    Cartao c;
+    
+    
     if(iRow != -1){
         String codigo = tabelaCartoes.getValueAt(iRow, 0)+""; 
         int cod = Integer.parseInt(codigo);
-        c = persCard.recuperaCartao(cod);
+        Cartao c = null;
+        Tarifa tax = null;
+        
+        for(Cartao uCartao : user.getCartoes()){
+            if(uCartao.getCodigo() == cod){
+                c = uCartao;
+            }
+        }
         int linha = Integer.parseInt(JOptionPane.showInputDialog("Digite a linha de ônibus usada."));
         try{
-            Tarifa tax = new Tarifa(linha, c);
-            persTar.salvaTarifa(tax);
+            tax = new Tarifa(linha, c);
+            //persTar.salvaTarifa(tax);
         } catch(Exception e){
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
+        persTar.salvaTarifa(tax);
         persCard.atualizaCartao(c);
         this.atualizaTabela(this.user);
+        
         } else {
             JOptionPane.showMessageDialog(rootPane, "Selecione um cartão.");
             return;

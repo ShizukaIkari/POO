@@ -31,7 +31,7 @@ public class PersistenciaPessoa {
          //abre a conexao com o  banco de dados chamado lanchonete.
          //esse banco de dado é em arquivo
          connection  =DriverManager.getConnection("jdbc:sqlite:transpoint.db");
-         System.out.println("Banco de dados aberto");   
+         System.out.println("Banco de dados pessoa aberto por: executeSQL");   
          stament = connection.createStatement();
          //exeucta o sql no meu banco de dados
          stament.executeUpdate(sql);
@@ -78,7 +78,7 @@ public class PersistenciaPessoa {
          Class.forName("org.sqlite.JDBC");
          //abre a conexao com o  banco de dados
          connection = DriverManager.getConnection("jdbc:sqlite:transpoint.db");
-         System.out.println("Banco de dados aberto");   
+         System.out.println("Banco de dados aberto por: recuperaDadosPessoa");   
          stament = connection.createStatement();
          //executa a query no meu banco de dados
          ResultSet rs = stament.executeQuery(sql);         
