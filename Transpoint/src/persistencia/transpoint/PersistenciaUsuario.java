@@ -33,22 +33,19 @@ public class PersistenciaUsuario {
 
     private void executeSQL(String sql) {
        Connection connection = null;
-        Statement stament = null;
-        try {
+       Statement stament = null;
+       try {
             //verifica se as classe da biblioteca existem
-         Class.forName("org.sqlite.JDBC");
-         //abre a conexao com o  banco de dados chamado lanchonete.
-         //esse banco de dado é em arquivo
-         connection  =DriverManager.getConnection("jdbc:sqlite:transpoint.db");
-         System.out.println("Banco de dados aberto");   
-         stament = connection.createStatement();
-         //exeucta o sql no meu banco de dados
-         stament.executeUpdate(sql);
-         stament.close();
-         //fecha a conexao com o banco de dados
-         connection.close();
-         
-            
+            Class.forName("org.sqlite.JDBC");
+            connection = DriverManager.getConnection("jdbc:sqlite:transpoint.db");
+            System.out.println("Banco usuario aberto");   
+            stament = connection.createStatement();
+            //exeucta o sql no meu banco de dados
+            stament.executeUpdate(sql);
+            stament.close();
+            //fecha a conexao com o banco de dados
+            connection.close();
+
         } catch (ClassNotFoundException ex) {
                 ex.printStackTrace();
         } catch (SQLException ex) {

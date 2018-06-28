@@ -46,7 +46,7 @@ public class Cartao {
     }
     //Saldo vai ser descontado de tarifa (passar valor negativo) ou recarregado por recarga.
     public void movimentaSaldo(double valor) throws Exception{
-        if ((this.saldo += valor )<0){
+        if (this.saldo + valor <0){
             throw new Exception("Saldo insuficiente");
         }else{
             this.saldo += valor;

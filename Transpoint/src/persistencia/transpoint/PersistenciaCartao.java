@@ -42,18 +42,15 @@ public class PersistenciaCartao {
         Statement stament = null;
         try {
             //verifica se as classe da biblioteca existem
-         Class.forName("org.sqlite.JDBC");
-         //abre a conexao com o  banco de dados chamado lanchonete.
-         //esse banco de dado é em arquivo
-         connection  =DriverManager.getConnection("jdbc:sqlite:transpoint.db");
-         System.out.println("Banco de dados aberto");   
-         stament = connection.createStatement();
-         //exeucta o sql no meu banco de dados
-         stament.executeUpdate(sql);
-         stament.close();
-         //fecha a conexao com o banco de dados
-         connection.close();
-         
+            Class.forName("org.sqlite.JDBC");
+            connection  =DriverManager.getConnection("jdbc:sqlite:transpoint.db");
+            System.out.println("Banco Cartão aberto por: executeSQL");   
+            stament = connection.createStatement();
+            //exeucta o sql no meu banco de dados
+            stament.executeUpdate(sql);
+            stament.close();
+            //fecha a conexao com o banco de dados
+            connection.close();
             
         } catch (ClassNotFoundException ex) {
                 ex.printStackTrace();
@@ -71,11 +68,11 @@ public class PersistenciaCartao {
         Statement stament = null;
         
         try {
-            //verifica se as classe da biblioteca existem
+         //verifica se as classe da biblioteca existem
          Class.forName("org.sqlite.JDBC");
          //abre a conexao com o  banco de dados
          connection  =DriverManager.getConnection("jdbc:sqlite:transpoint.db");
-         System.out.println("Banco cartao aberto");   
+         System.out.println("Banco cartao aberto por: recuperaCartoesUsuario");   
          stament = connection.createStatement();
          //executa a query no meu banco de dados
          ResultSet rs = stament.executeQuery(sql);  
@@ -114,6 +111,7 @@ public class PersistenciaCartao {
         card.getTipoCategoria()+"',"+
         card.getSaldo()+",'"+
         bool.toUpperCase()+"')";
+        System.out.println("savecard");
         this.executeSQL(sql);
     }
     
@@ -127,7 +125,7 @@ public class PersistenciaCartao {
          Class.forName("org.sqlite.JDBC");
          //abre a conexao com o  banco de dados
          connection =DriverManager.getConnection("jdbc:sqlite:transpoint.db");
-         System.out.println("Banco de dados aberto");   
+         System.out.println("Banco de cartao aberto por: recuperaCartao");   
          stament = connection.createStatement();
          //executa a query no meu banco de dados
          ResultSet rs = stament.executeQuery(sql);  
@@ -167,6 +165,7 @@ public class PersistenciaCartao {
         + c.getSaldo()+", disponivel='" 
         + d.toUpperCase()
         + "' WHERE codigo =" + c.getCodigo();
+        System.out.println("attcard");
         this.executeSQL(sql);
     }
 

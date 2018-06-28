@@ -5,9 +5,6 @@
  */
 package visao;
 
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.cartao.Cartao;
 import modelo.pagamento.Recarga;
@@ -24,20 +21,17 @@ public class UIRecarga extends javax.swing.JFrame {
     /**
      * Creates new form UIRecarga
      */
+    private Usuario user;
     private Cartao card;
-
-    public Cartao getCard() {
-        return card;
-    }
-
-    public void setCard(Cartao card) {
-        this.card = card;
-    }
         
-    
-    public UIRecarga(int codCard) {
-        PersistenciaCartao persC = new PersistenciaCartao();
-        this.card = persC.recuperaCartao(codCard);
+    public UIRecarga(Usuario u, int codCard) {
+        this.user = u;
+     
+        for(Cartao uCartao : u.getCartoes()){
+            if(uCartao.getCodigo() == codCard){
+                this.card = uCartao;
+            }
+        }
         initComponents();
     }
 
@@ -141,14 +135,13 @@ public class UIRecarga extends javax.swing.JFrame {
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         Recarga nRecarga;
         PersistenciaCartao persCard = new PersistenciaCartao();
-        PersistenciaUsuario persUser = new PersistenciaUsuario();
-        Usuario bfUser = persUser.recuperaUsuario(card.getCpfUser()); //usuário "anterior"
+              
         try {
             nRecarga = new Recarga(this.card,Double.parseDouble(valorRecarga.getText()));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             return;
-        }
+        }       
        
         if(opBoleto.isSelected()){
             nRecarga.setFormaPagamento("Boleto");
@@ -156,7 +149,7 @@ public class UIRecarga extends javax.swing.JFrame {
             nRecarga.setFormaPagamento("Cartão de Crédito");
         }
         persCard.atualizaCartao(card);
-        UITranspoint mainTela = new UITranspoint(bfUser); //reabrimos esta tela para o saldo atualizar na tabela
+        UITranspoint mainTela = new UITranspoint(user); //reabrimos esta tela para o saldo atualizar na tabela
         mainTela.setVisible(true);
         this.dispose();
         
@@ -198,10 +191,12 @@ public class UIRecarga extends javax.swing.JFrame {
         }
         //</editor-fold>
         int testeCod = 12345;
+        Usuario exibU = new Usuario();
+        exibU.setNome("Test User");
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UIRecarga(testeCod).setVisible(true);
+                new UIRecarga(exibU,testeCod).setVisible(true);
             }
         });
     }

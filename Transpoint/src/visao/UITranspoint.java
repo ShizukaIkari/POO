@@ -35,13 +35,15 @@ public class UITranspoint extends javax.swing.JFrame {
         DefaultTableModel tableCards = (DefaultTableModel) tabelaCartoes.getModel();
         tableCards.getDataVector().removeAllElements();
         tableCards.fireTableDataChanged();
-        PersistenciaCartao persCard = new PersistenciaCartao();
-        ArrayList<Cartao> cartoes = null;
+        
+        ArrayList<Cartao> cartoes = u.getCartoes();
+        /*PersistenciaCartao persCard = new PersistenciaCartao();
         try{
             cartoes = persCard.recuperaCartoesUsuario(u);
         } catch (Exception e){
             System.out.println(e.getMessage());
-        }
+        }*/
+        
         for (Cartao card: cartoes){
             
             String disponibilidade;
@@ -219,7 +221,7 @@ public class UITranspoint extends javax.swing.JFrame {
         if(iRow != -1){
             String codigo = tabelaCartoes.getValueAt(iRow, 0)+""; //gambiarra admito
             int cod = Integer.parseInt(codigo);
-            UIRecarga recharge = new UIRecarga(cod);
+            UIRecarga recharge = new UIRecarga(this.user,cod);
             recharge.setVisible(true);
             this.dispose();
         } else {
@@ -272,7 +274,6 @@ public class UITranspoint extends javax.swing.JFrame {
         int cod = Integer.parseInt(codigo);
         c = persCard.recuperaCartao(cod);
         int linha = Integer.parseInt(JOptionPane.showInputDialog("Digite a linha de ônibus usada."));
-        
         try{
             Tarifa tax = new Tarifa(linha, c);
             persTar.salvaTarifa(tax);

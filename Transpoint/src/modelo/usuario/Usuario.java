@@ -34,25 +34,8 @@ public class Usuario extends Pessoa {
             this.senha = senha;
         else throw new Exception ("Senha não pode ser vazia.");
     }
-    
-    
-    /*
-    //Caso um cartão seja cancelado ele é removido da lista
-    public boolean removeCartao(ArrayList<Cartao> listaCartoes, Cartao card){
-        
-        boolean removido = false;
-        for(int i =0; i<listaCartoes.size();i++){
-            if(card.comparaCartao(listaCartoes.get(i),card)){ //SE DER, IMPLEMENTAR A FUNÇÃO
-                listaCartoes.remove(i);
-                removido = true;
-            }
-        }
-        return removido;
-        
-    } 
-    
-    */
-    public ArrayList getCartoes(){
+  
+    public ArrayList<Cartao> getCartoes(){
         return cartoesTranscol;
     }
         
