@@ -17,12 +17,23 @@ public class Recarga {
     private double valor; //quantia desejada para incrementar saldo do cartão
     private String dataHoraRecarga; //Salvando hora e data da recarga
     private String formaPagamento;
+    private Cartao cardR;
+
+    public Cartao getCardR() {
+        return cardR;
+    }
+
+    public void setCardR(Cartao c) {
+        this.cardR = c;
+    }
+    
     
     public Recarga(Cartao c, double val) throws Exception{
         if (val<0){
             throw new Exception("Recarga não pode ser negativa");
         }else{
             setDataRecarga();
+            setCardR(c);
             this.valor = val;
             c.movimentaSaldo(val);
             c.setDisponivel(true);

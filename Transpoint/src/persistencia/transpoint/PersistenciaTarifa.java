@@ -176,6 +176,7 @@ public class PersistenciaTarifa {
         }
         return historico;
     }
+    /*Recupera todas as tarifas com o cartão que possui código cadastrado*/
     public ArrayList<Tarifa> historicoUsuarioCartao(int codigo){
         ArrayList<Tarifa> historico = new ArrayList<>();
         String sql ="SELECT * FROM tarifa WHERE codCartao = " + codigo;

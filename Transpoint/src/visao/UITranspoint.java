@@ -6,9 +6,12 @@
 package visao;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.cartao.Cartao;
+import modelo.pagamento.Recarga;
 import modelo.pagamento.Tarifa;
 import modelo.usuario.Usuario;
 import persistencia.transpoint.PersistenciaCartao;
@@ -22,7 +25,25 @@ public class UITranspoint extends javax.swing.JFrame {
 
     
     private Usuario user;
+    private Recarga lastRecarga;
 
+    public boolean isBotaoClicavel(){
+        if(this.lastRecarga==null){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    
+    public void setRecarga(Recarga r){
+        this.lastRecarga = r;
+        if(isBotaoClicavel()){
+            jbLastRecarga.setEnabled(true);
+        }else{
+            jbLastRecarga.setEnabled(false);
+        }
+    }
     public Usuario getUser() {
         return user;
     }
@@ -85,6 +106,7 @@ public class UITranspoint extends javax.swing.JFrame {
         jbBloqueio = new javax.swing.JButton();
         lblCartoes = new javax.swing.JLabel();
         jbTarifa = new javax.swing.JButton();
+        jbLastRecarga = new javax.swing.JButton();
         menuOpcoes = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jmTrocaSenha = new javax.swing.JMenuItem();
@@ -133,6 +155,14 @@ public class UITranspoint extends javax.swing.JFrame {
             }
         });
 
+        jbLastRecarga.setText("Desfazer Recarga");
+        jbLastRecarga.setEnabled(isBotaoClicavel());
+        jbLastRecarga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLastRecargaActionPerformed(evt);
+            }
+        });
+
         jMenu2.setText("Opções");
 
         jmTrocaSenha.setText("Trocar Senha");
@@ -176,11 +206,13 @@ public class UITranspoint extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nomeUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblCartoes, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 236, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCartoes, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbLastRecarga))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
                         .addComponent(jbBloqueio, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbTarifa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -202,7 +234,9 @@ public class UITranspoint extends javax.swing.JFrame {
                     .addComponent(jbRecarga)
                     .addComponent(jbBloqueio)
                     .addComponent(jbTarifa))
-                .addGap(45, 45, 45))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbLastRecarga)
+                .addContainerGap())
         );
 
         pack();
@@ -299,6 +333,21 @@ public class UITranspoint extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbTarifaActionPerformed
 
+    private void jbLastRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLastRecargaActionPerformed
+        PersistenciaCartao persCard = new PersistenciaCartao();
+        Cartao c = lastRecarga.getCardR();
+        
+        try {
+            c.movimentaSaldo(-lastRecarga.getValor());
+        } catch (Exception ex) {
+            Logger.getLogger(UITranspoint.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        persCard.atualizaCartao(c);
+        this.atualizaTabela(user);
+        setRecarga(null);
+    }//GEN-LAST:event_jbLastRecargaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -339,6 +388,7 @@ public class UITranspoint extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbBloqueio;
+    private javax.swing.JButton jbLastRecarga;
     private javax.swing.JButton jbRecarga;
     private javax.swing.JButton jbTarifa;
     private javax.swing.JMenuItem jmHistorico;

@@ -151,6 +151,7 @@ public class UIRecarga extends javax.swing.JFrame {
         }
         persCard.atualizaCartao(card);
         UITranspoint mainTela = new UITranspoint(user); //reabrimos esta tela para o saldo atualizar na tabela
+        mainTela.setRecarga(nRecarga);
         mainTela.setVisible(true);
         this.dispose();
         
