@@ -5,10 +5,15 @@
  */
 package visao;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import modelo.cartao.Cartao;
 import modelo.pagamento.Tarifa;
 import modelo.usuario.Usuario;
 import persistencia.transpoint.PersistenciaTarifa;
@@ -28,7 +33,14 @@ public class HistoricoUsuario extends javax.swing.JFrame {
         this.user= u;
         initComponents();
         atualizaTabela(u);
+        jbcCartao.addItem("Todos");
+        /*Preenche combo box de cartoes com código dos cartões*/
+        for(Cartao c : u.getCartoes()){
+            jbcCartao.addItem(c.getCodigo()+"");
+        }
+        
     }
+    /*Tabela mostrando o histórico completo*/
     private void atualizaTabela(Usuario u){
         DefaultTableModel tableHist = (DefaultTableModel) jtHistorico.getModel();
         jtHistorico.setRowSorter(new TableRowSorter(tableHist));
@@ -37,21 +49,36 @@ public class HistoricoUsuario extends javax.swing.JFrame {
         PersistenciaTarifa persTarifas = new PersistenciaTarifa();
         System.out.println("att tabela historico");
         ArrayList<Tarifa> tarifas = persTarifas.geraHistoricoTarifasUsuario(u);
-       
-        for (Tarifa t: tarifas){
-            tableHist.addRow(new Object[] {
-                t.getData(),
-                t.getCodCartUtilizado(),
-                t.getLinha(),
-                t.getValor()
-                    
-            });
+        if(tarifas != null){
+            for (Tarifa t: tarifas){
+                tableHist.addRow(new Object[] {
+                    t.getData(),
+                    t.getCodCartUtilizado(),
+                    t.getLinha(),
+                    t.getValor()
+
+                });
+            }
         }
         
     }
-    
-    private void tabelaHistorico(Usuario u){
-        
+    /*Método para o histórico considerando os filtros*/
+    private void tabelaHistorico(ArrayList<Tarifa> tarifas){
+        DefaultTableModel tableHist = (DefaultTableModel) jtHistorico.getModel();
+        jtHistorico.setRowSorter(new TableRowSorter(tableHist));
+        tableHist.getDataVector().removeAllElements();
+        tableHist.fireTableDataChanged();
+        if(tarifas != null){
+            for (Tarifa t: tarifas){
+                tableHist.addRow(new Object[] {
+                    t.getData(),
+                    t.getCodCartUtilizado(),
+                    t.getLinha(),
+                    t.getValor()
+
+                });
+            }
+        }
     }
 
     /**
@@ -68,14 +95,11 @@ public class HistoricoUsuario extends javax.swing.JFrame {
         lbHistorico = new javax.swing.JLabel();
         lbOBS = new javax.swing.JLabel();
         jbOK = new javax.swing.JButton();
-        jcbCartao = new javax.swing.JComboBox<>();
-        jTextField2 = new javax.swing.JTextField();
-        lblData = new javax.swing.JLabel();
+        linhaRequerida = new javax.swing.JTextField();
         lblLinha = new javax.swing.JLabel();
         lblCartao = new javax.swing.JLabel();
-        jbData = new javax.swing.JButton();
         jbLinha = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jbcCartao = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Histórico de Passagens");
@@ -110,85 +134,75 @@ public class HistoricoUsuario extends javax.swing.JFrame {
             }
         });
 
-        jcbCartao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
-
-        lblData.setText("Visualizar por data:");
-
         lblLinha.setText("Visualizar por linha:");
 
         lblCartao.setText("Visualizar por cartão:");
 
-        jbData.setText("Ver");
-
         jbLinha.setText("Ver");
+        jbLinha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLinhaActionPerformed(evt);
+            }
+        });
+
+        jbcCartao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbcCartaoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbOBS, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbOK, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbHistorico)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lbHistorico)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jComboBox1, 0, 112, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(lblLinha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(linhaRequerida, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jbData)
-                                        .addGap(71, 71, 71)))
-                                .addComponent(jcbCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)))
-                        .addContainerGap())
+                                        .addComponent(jbLinha)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblCartao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jbcCartao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(36, 36, 36))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblData)
+                        .addComponent(lbOBS, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblCartao)
-                        .addGap(48, 48, 48))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblLinha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbLinha)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jbOK, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbHistorico)
                 .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblData)
-                    .addComponent(lblCartao))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbCartao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbData)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCartao)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblLinha)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(linhaRequerida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbLinha)
+                            .addComponent(jbcCartao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addComponent(lblLinha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbLinha))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbOK)
                     .addComponent(lbOBS, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -198,6 +212,31 @@ public class HistoricoUsuario extends javax.swing.JFrame {
     private void jbOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbOKActionPerformed
         this.dispose();
     }//GEN-LAST:event_jbOKActionPerformed
+/*Atualizará tabela para mostrar apenas linha selecionada ou tudo*/
+    private void jbLinhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLinhaActionPerformed
+          if(linhaRequerida.getText().isEmpty()){
+            this.atualizaTabela(user);
+        }else{
+            PersistenciaTarifa persTarifas = new PersistenciaTarifa();
+            ArrayList<Tarifa> taxes;
+            int linha = Integer.parseInt(linhaRequerida.getText());
+            taxes = persTarifas.historicoUsuarioLinha(user, linha);
+            this.tabelaHistorico(taxes);
+        }
+    }//GEN-LAST:event_jbLinhaActionPerformed
+/*Atualizará tabela para mostrar apenas tarifas no cartão selecionado ou tudo*/
+    private void jbcCartaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbcCartaoActionPerformed
+        int ind = jbcCartao.getSelectedIndex();
+        if(ind!=0){
+            int cod = Integer.parseInt(jbcCartao.getSelectedItem()+"");
+            PersistenciaTarifa persTarifas = new PersistenciaTarifa();
+            ArrayList<Tarifa> taxes;
+            taxes = persTarifas.historicoUsuarioCartao(cod);
+            this.tabelaHistorico(taxes);
+        }else{
+            this.atualizaTabela(user);
+        }
+    }//GEN-LAST:event_jbcCartaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,6 +264,8 @@ public class HistoricoUsuario extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(HistoricoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        /*Um usuário teste pra IDE não reclamar, não se deve executar esta tela sozinha*/
         Usuario exibU = new Usuario();
         exibU.setNome("Test User");
         /* Create and display the form */
@@ -236,18 +277,15 @@ public class HistoricoUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JButton jbData;
     private javax.swing.JButton jbLinha;
     private javax.swing.JButton jbOK;
-    private javax.swing.JComboBox<String> jcbCartao;
+    private javax.swing.JComboBox<String> jbcCartao;
     private javax.swing.JTable jtHistorico;
     private javax.swing.JLabel lbHistorico;
     private javax.swing.JLabel lbOBS;
     private javax.swing.JLabel lblCartao;
-    private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblLinha;
+    private javax.swing.JTextField linhaRequerida;
     // End of variables declaration//GEN-END:variables
 }

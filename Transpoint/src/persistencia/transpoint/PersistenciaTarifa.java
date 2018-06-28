@@ -111,7 +111,7 @@ public class PersistenciaTarifa {
                 Class.forName("org.sqlite.JDBC");
                 //abre a conexao com o  banco de dados
                 connection = DriverManager.getConnection("jdbc:sqlite:transpoint.db");
-                System.out.println("Banco de dados aberto");   
+                System.out.println("Banco de tarifa aberto por: geraHistoricoTarifasUsuario");   
                 stament = connection.createStatement();
                 //executa a query no meu banco de dados
                 ResultSet rs = stament.executeQuery(sql);         
@@ -134,6 +134,80 @@ public class PersistenciaTarifa {
                 Logger.getLogger(PersistenciaCartao.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        return historico;
+    }
+    
+    public ArrayList<Tarifa> historicoUsuarioLinha(Usuario u,int linha){
+        ArrayList<Integer> codigos = this.codigosCartoes(u);
+        ArrayList<Tarifa> historico = new ArrayList<>();
+        for(int codigo : codigos){
+            String sql ="SELECT * FROM tarifa WHERE codCartao = " + codigo+" AND linha ="+linha;
+            Connection connection = null;
+            Statement stament = null;
+            try {
+                //verifica se as classe da biblioteca existem
+                Class.forName("org.sqlite.JDBC");
+                //abre a conexao com o  banco de dados
+                connection = DriverManager.getConnection("jdbc:sqlite:transpoint.db");
+                System.out.println("Banco de tarifa aberto por: historicoUsuarioLinha");   
+                stament = connection.createStatement();
+                //executa a query no meu banco de dados
+                ResultSet rs = stament.executeQuery(sql);         
+                while(rs.next()){
+                    Tarifa t = new Tarifa();
+                    t.setCodCartUtilizado(Integer.parseInt(rs.getString("codCartao")));
+                    t.setValor(Double.parseDouble(rs.getString("valor")));
+                    t.setLinha(Integer.parseInt(rs.getString("linha")));
+                    t.setData(rs.getString("data"));
+                    historico.add(t);
+                }
+                stament.close();
+                //fecha a conexao com o banco de dados
+                connection.close();           
+            } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+            } catch (SQLException ex) {
+                    ex.printStackTrace();
+            } catch (Exception ex) {
+                Logger.getLogger(PersistenciaCartao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+        }
+        return historico;
+    }
+    public ArrayList<Tarifa> historicoUsuarioCartao(int codigo){
+        ArrayList<Tarifa> historico = new ArrayList<>();
+        String sql ="SELECT * FROM tarifa WHERE codCartao = " + codigo;
+            Connection connection = null;
+            Statement stament = null;
+            try {
+                //verifica se as classe da biblioteca existem
+                Class.forName("org.sqlite.JDBC");
+                //abre a conexao com o  banco de dados
+                connection = DriverManager.getConnection("jdbc:sqlite:transpoint.db");
+                System.out.println("Banco de tarifa aberto por: historicoUsuarioLinha");   
+                stament = connection.createStatement();
+                //executa a query no meu banco de dados
+                ResultSet rs = stament.executeQuery(sql);         
+                while(rs.next()){
+                    Tarifa t = new Tarifa();
+                    t.setCodCartUtilizado(Integer.parseInt(rs.getString("codCartao")));
+                    t.setValor(Double.parseDouble(rs.getString("valor")));
+                    t.setLinha(Integer.parseInt(rs.getString("linha")));
+                    t.setData(rs.getString("data"));
+                    historico.add(t);
+                }
+                stament.close();
+                //fecha a conexao com o banco de dados
+                connection.close();           
+            } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+            } catch (SQLException ex) {
+                    ex.printStackTrace();
+            } catch (Exception ex) {
+                Logger.getLogger(PersistenciaCartao.class.getName()).log(Level.SEVERE, null, ex);
+            }
         return historico;
     }
 }
