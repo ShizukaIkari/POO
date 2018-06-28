@@ -27,12 +27,14 @@ public class HistoricoUsuario extends javax.swing.JFrame {
     public HistoricoUsuario(Usuario u) {
         this.user= u;
         initComponents();
+        atualizaTabela(u);
     }
     private void atualizaTabela(Usuario u){
         DefaultTableModel tableHist = (DefaultTableModel) jtHistorico.getModel();
         tableHist.getDataVector().removeAllElements();
         tableHist.fireTableDataChanged();
         PersistenciaTarifa persTarifas = new PersistenciaTarifa();
+        System.out.println("att tabela historico");
         ArrayList<Tarifa> tarifas = persTarifas.geraHistoricoTarifasUsuario(u);
        
         for (Tarifa t: tarifas){
