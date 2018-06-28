@@ -37,13 +37,6 @@ public class UITranspoint extends javax.swing.JFrame {
         tableCards.fireTableDataChanged();
         
         ArrayList<Cartao> cartoes = u.getCartoes();
-        /*PersistenciaCartao persCard = new PersistenciaCartao();
-        try{
-            cartoes = persCard.recuperaCartoesUsuario(u);
-        } catch (Exception e){
-            System.out.println(e.getMessage());
-        }*/
-        
         for (Cartao card: cartoes){
             
             String disponibilidade;
@@ -237,7 +230,7 @@ public class UITranspoint extends javax.swing.JFrame {
             String codigo = tabelaCartoes.getValueAt(iRow, 0)+""; 
             int cod = Integer.parseInt(codigo);
 
-            UIBloqueioCartao block = new UIBloqueioCartao(cod);
+            UIBloqueioCartao block = new UIBloqueioCartao(this.user,cod);
             block.setVisible(true);
             this.dispose();
         } else{

@@ -38,7 +38,7 @@ public class PersistenciaUsuario {
             //verifica se as classe da biblioteca existem
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:transpoint.db");
-            System.out.println("Banco usuario aberto");   
+            System.out.println("Banco usuario aberto por: executeSQL");   
             stament = connection.createStatement();
             //exeucta o sql no meu banco de dados
             stament.executeUpdate(sql);
@@ -72,6 +72,7 @@ public class PersistenciaUsuario {
         try{
             Class.forName("org.sqlite.JDBC");
             connection  =DriverManager.getConnection("jdbc:sqlite:transpoint.db");
+            System.out.println("Banco usuario aberto por: recuperaUsuario");
             stament = connection.createStatement();
             ResultSet rs = stament.executeQuery(sql);
             Usuario user =null;
@@ -115,6 +116,7 @@ public class PersistenciaUsuario {
         try{
             Class.forName("org.sqlite.JDBC");
             connection  =DriverManager.getConnection("jdbc:sqlite:transpoint.db");
+            System.out.println("Banco usuario aberto por: validaUsuario");
             stament = connection.createStatement();
             ResultSet rs = stament.executeQuery(sql);
             

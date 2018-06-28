@@ -5,9 +5,6 @@
  */
 package visao;
 
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.cartao.BloqueioCartao;
 import modelo.cartao.Cartao;
@@ -24,20 +21,16 @@ public class UIBloqueioCartao extends javax.swing.JFrame {
     /**
      * Creates new form UIBloqueioCartao
      */
+    private Usuario user;
     private Cartao card;
 
-    public Cartao getCard() {
-        return card;
-    }
-
-    public void setCard(Cartao card) {
-        this.card = card;
-    }
-    
-    
-    public UIBloqueioCartao(int codCard) {
-        PersistenciaCartao persC = new PersistenciaCartao();
-        this.card = persC.recuperaCartao(codCard);
+     public UIBloqueioCartao(Usuario u,int codCard) {
+        this.user = u;
+        for(Cartao uCartao : u.getCartoes()){
+            if(uCartao.getCodigo() == codCard){
+                this.card = uCartao;
+            }
+        }
         initComponents();
     }
 
@@ -118,9 +111,7 @@ public class UIBloqueioCartao extends javax.swing.JFrame {
     private void jbSolicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSolicActionPerformed
         BloqueioCartao solic = new BloqueioCartao();
         PersistenciaCartao persCard = new PersistenciaCartao();
-        PersistenciaUsuario persUser = new PersistenciaUsuario();
-        Usuario bfUser = persUser.recuperaUsuario(card.getCpfUser()); //usuário "anterior"
-        
+               
         if(motivo.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Por favor, especifique o motivo.");
         } else{
@@ -128,17 +119,14 @@ public class UIBloqueioCartao extends javax.swing.JFrame {
             solic.pedirBloqueio(this.card,motivo.getText());
             persCard.atualizaCartao(this.card);
             
-            UITranspoint mainTela = new UITranspoint(bfUser); //reabrimos esta tela para o saldo atualizar na tabela
+            UITranspoint mainTela = new UITranspoint(this.user); //reabrimos esta tela para o saldo atualizar na tabela
             mainTela.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_jbSolicActionPerformed
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
-        PersistenciaUsuario persUser = new PersistenciaUsuario();
-        System.out.println(card.getCpfUser());
-        Usuario bfUser = persUser.recuperaUsuario(card.getCpfUser()); //usuário "anterior"
-        UITranspoint mainTela = new UITranspoint(bfUser); //reabre
+        UITranspoint mainTela = new UITranspoint(this.user); //reabre
         mainTela.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jbCancelarActionPerformed
@@ -170,10 +158,12 @@ public class UIBloqueioCartao extends javax.swing.JFrame {
         }
         //</editor-fold>
         int testeCod = 12345;
+        Usuario exibU = new Usuario();
+        exibU.setNome("Test User");
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UIBloqueioCartao(testeCod).setVisible(true);
+                new UIBloqueioCartao(exibU,testeCod).setVisible(true);
             }
         });
     }

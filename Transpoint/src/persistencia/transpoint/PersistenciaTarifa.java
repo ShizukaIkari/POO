@@ -77,7 +77,7 @@ public class PersistenciaTarifa {
             Class.forName("org.sqlite.JDBC");
             //abre a conexao com o  banco de dados
             connection = DriverManager.getConnection("jdbc:sqlite:transpoint.db");
-            System.out.println("Banco de dados aberto");   
+            System.out.println("Banco de tarifa aberto por: codigosCartoes");   
             stament = connection.createStatement();
             //executa a query no meu banco de dados
             ResultSet rs = stament.executeQuery(sql);         

@@ -22,7 +22,9 @@ public class Recarga {
     public Recarga(Cartao c, double val) throws Exception{
         if((c.getCategoria().isGratuita())){
             throw new Exception("Categorias gratuitas não recebem recarga.");
-        } else{
+        } else if (val<0){
+            throw new Exception("Recarga não pode ser negativa");
+        }else{
             setDataRecarga();
             this.valor = val;
             c.movimentaSaldo(val);
