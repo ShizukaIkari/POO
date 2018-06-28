@@ -174,21 +174,20 @@ public class UITranspoint extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelGreetings)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nomeUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCartoes, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jbBloqueio, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jbTarifa, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(lblCartoes, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 236, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jbRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbBloqueio, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbTarifa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -202,7 +201,7 @@ public class UITranspoint extends javax.swing.JFrame {
                 .addComponent(lblCartoes)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbRecarga)
                     .addComponent(jbBloqueio)
@@ -264,15 +263,24 @@ public class UITranspoint extends javax.swing.JFrame {
     }//GEN-LAST:event_jmTrocaSenhaActionPerformed
 
     private void jbTarifaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTarifaActionPerformed
-       int iRow = tabelaCartoes.getSelectedRow(); //indice da linha
+    int iRow = tabelaCartoes.getSelectedRow(); //indice da linha
+    PersistenciaCartao persCard = new PersistenciaCartao();
+    PersistenciaTarifa persTar = new PersistenciaTarifa();
+    Cartao c;
+    if(iRow != -1){
+        String codigo = tabelaCartoes.getValueAt(iRow, 0)+""; 
+        int cod = Integer.parseInt(codigo);
+        c = persCard.recuperaCartao(cod);
+        int linha = Integer.parseInt(JOptionPane.showInputDialog("Digite a linha de ônibus usada."));
         
-        if(iRow != -1){
-            JOptionPane.showMessageDialog(rootPane, "Estou mexendo, relaxa");
-            /*
-            String codigo = tabelaCartoes.getValueAt(iRow, 0)+""; //gambiarra admito
-            int cod = Integer.parseInt(codigo);
-            */
-            this.dispose();
+        try{
+            Tarifa tax = new Tarifa(linha, c);
+            persTar.salvaTarifa(tax);
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+        }
+        persCard.atualizaCartao(c);
+        this.atualizaTabela(this.user);
         } else {
             JOptionPane.showMessageDialog(rootPane, "Selecione um cartão.");
             return;
