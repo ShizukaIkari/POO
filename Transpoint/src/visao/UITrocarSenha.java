@@ -52,6 +52,7 @@ public class UITrocarSenha extends javax.swing.JFrame {
         confirmNew = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Troca de Senha");
 
         lbOldPass.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbOldPass.setText("Senha antiga:");

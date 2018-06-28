@@ -48,6 +48,7 @@ public class UICadastroUser extends javax.swing.JFrame {
         confirmSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro Usuário");
         setLocationByPlatform(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N

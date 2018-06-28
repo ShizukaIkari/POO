@@ -92,6 +92,7 @@ public class UITranspoint extends javax.swing.JFrame {
         jmLogout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Transpoint");
 
         labelGreetings.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         labelGreetings.setText("Olá,");

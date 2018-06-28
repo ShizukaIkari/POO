@@ -54,6 +54,7 @@ public class UIRecarga extends javax.swing.JFrame {
         valorRecarga = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Recarga");
         setLocation(new java.awt.Point(600, 250));
 
         buttonGroup1.add(opBoleto);

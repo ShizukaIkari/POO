@@ -50,6 +50,7 @@ public class UIBloqueioCartao extends javax.swing.JFrame {
         jbCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Bloqueio de Cartão");
 
         lbMotivo.setText("Informe o motivo do bloqueio:");
 
