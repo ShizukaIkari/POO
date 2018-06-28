@@ -41,9 +41,11 @@ public class Cartao {
     public double getSaldo() {
         return saldo;
     }
-
+    public void setSaldo(double valor){
+        this.saldo = valor;
+    }
     //Saldo vai ser descontado de tarifa (passar valor negativo) ou recarregado por recarga.
-    public void setSaldo(double valor) throws Exception{
+    public void movimentaSaldo(double valor) throws Exception{
         if ((this.saldo += valor )<0){
             throw new Exception("Saldo insuficiente");
         }else{

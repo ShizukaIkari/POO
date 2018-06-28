@@ -25,7 +25,7 @@ public class Recarga {
         } else{
             setDataRecarga();
             this.valor = val;
-            c.setSaldo(this.valor);
+            c.movimentaSaldo(this.valor);
         }
     }
     

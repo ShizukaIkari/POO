@@ -25,7 +25,7 @@ public class Tarifa {
         if (c.isDisponivel()){        //Cartão deve estar disponível para uso
             valor = p.getValorPassagem() * c.getCategoria().getDesconto();
             try{
-                c.setSaldo(-valor);
+                c.movimentaSaldo(-valor);
             } catch (Exception e){
                 c.setDisponivel(false);
                 throw e;
