@@ -154,9 +154,9 @@ public class PersistenciaUsuario {
     }
     
     public void atualizaUsuario(Usuario u){
-        String sql = "UPDATE usuario SET senha=" 
+        String sql = "UPDATE usuario SET senha='" 
         + u.getSenha()
-        + " WHERE cpf =" + u.getCpf();
+        + "' WHERE cpf =" + u.getCpf();
         this.executeSQL(sql);
     }
     

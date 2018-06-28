@@ -136,7 +136,7 @@ public class UITrocarSenha extends javax.swing.JFrame {
     private void jbOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbOKActionPerformed
         PersistenciaUsuario bdUser = new PersistenciaUsuario();
         if(oldSenha.getText().equals(this.user.getSenha())){
-            if(oldSenha.getText().equals(newSenha.getText())){
+            if(newSenha.getText().equals(confirmNew.getText())){
                 try{
                     this.user.setSenha(newSenha.getText());
                 }catch (Exception ex){
