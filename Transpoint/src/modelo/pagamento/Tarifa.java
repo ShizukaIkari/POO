@@ -24,7 +24,6 @@ public class Tarifa {
         
         if (c.isDisponivel()){        //Cartão deve estar disponível para uso
             valor = p.getValorPassagem() * c.getCategoria().getDesconto();
-            System.out.println("Valor passagem: "+valor);
             try{
                 c.movimentaSaldo(-valor);
             } catch (Exception e){

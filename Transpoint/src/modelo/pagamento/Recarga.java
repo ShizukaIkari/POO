@@ -25,6 +25,7 @@ public class Recarga {
             setDataRecarga();
             this.valor = val;
             c.movimentaSaldo(val);
+            c.setDisponivel(true);
         }
     }
     

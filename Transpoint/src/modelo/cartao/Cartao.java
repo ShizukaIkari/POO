@@ -50,6 +50,7 @@ public class Cartao {
             throw new Exception("Saldo insuficiente");
         }else{
             this.saldo += valor;
+            this.setDisponivel(true);
         }
         
     }
