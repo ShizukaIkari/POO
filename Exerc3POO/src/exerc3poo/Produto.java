@@ -47,4 +47,7 @@ public class Produto {
         this.qtdEstoque = qtdEstoque;
     }
     
+    public boolean isEmEstoque(Produto p){
+        return p.getQtdEstoque()>0;
+    }
 }
