@@ -42,14 +42,19 @@ public class ItemPedido {
     public double getValor() {
         return valor;
     }
-    //Valor == valor produto * qtd
+    
     public void setValor(double valor) {
-        if(valor != this.produto.getPrecoUni()*this.quantidade){
-            valor = this.produto.getPrecoUni()*this.quantidade;
-        }else {
+        if (valor >=0){
             this.valor = valor;
+        } else {
+            //Exception, mas pra ficar simples:
+            System.out.println("Valor negativo");
         }
+        
     }
     
+    public void calculaSubTotal(){
+        setValor(this.produto.getPrecoUni()*this.quantidade);
+    }
     
 }

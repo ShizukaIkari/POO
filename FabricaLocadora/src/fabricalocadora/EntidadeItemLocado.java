@@ -5,7 +5,14 @@
  */
 package fabricalocadora;
 
-/* Fábrica da Locadora, responsável por iniciar objetos da locadora  */
-public interface InitLocadora {
-    public Object criarEntidade();
+/**
+ *
+ * @author Serenna
+ */
+public class EntidadeItemLocado{
+    private EntidadeFilme filmeLocado;
+    private double desconto;
+    private double valor;
+    private int instanteParada;
+    
 }

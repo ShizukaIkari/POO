@@ -9,13 +9,13 @@ package fabricalocadora;
  *
  * @author 20161bsi0284
  */
-public class FabricaLocadora {
+public class ExercicioFabricaLocadora {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Object teste = FabricaLocacao.gerarEntidade("Cliente");
     }
     
 }
