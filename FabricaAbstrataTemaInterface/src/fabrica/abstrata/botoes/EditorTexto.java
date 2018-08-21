@@ -49,8 +49,8 @@ public class EditorTexto extends javax.swing.JFrame {
                 
         cancel = fabric.criaBotaoCancel();
         ok = fabric.criaBotaoOK();
-        /*ok.setText("OK");
-        cancel.setText("Cancel"); oi lava flow*/
+        ok.setText("OK");
+        cancel.setText("Cancel");
         
                 
         jLabel1 = new javax.swing.JLabel();

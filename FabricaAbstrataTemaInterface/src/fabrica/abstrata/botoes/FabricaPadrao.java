@@ -15,16 +15,12 @@ public class FabricaPadrao extends FabricaAbstrataBotoes{
 
     @Override
     public JButton criaBotaoOK() {
-        JButton ok = new JButton();
-        ok.setText("OK");
-        return ok;
+        return new JButton();
     }
 
     @Override
     public JButton criaBotaoCancel() {
-        JButton cancel = new JButton();
-        cancel.setText("Cancel");
-        return cancel;
+        return new JButton();
     }
     
 }
