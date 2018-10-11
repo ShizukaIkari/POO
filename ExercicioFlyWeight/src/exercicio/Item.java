@@ -35,7 +35,7 @@ public class Item {
     }
 
     public void setStatus(StatusItem status) {
-        this.status = status;
+        this.status = status;                    
     }
     
     
