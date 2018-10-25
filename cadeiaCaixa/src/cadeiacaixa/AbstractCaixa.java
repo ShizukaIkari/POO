@@ -20,9 +20,11 @@ public abstract class AbstractCaixa implements CaixaAutomatico{
     //processPagamento
     @Override
     public void processaSaque(int valor) {
-        if(nota != null && valor >0){
+        if(valor >0){
             valor = handleSaque(valor);
-            this.nota.processaSaque(valor);
+            if(nota != null){
+                this.nota.processaSaque(valor);
+            }
         }
     }
     
