@@ -15,7 +15,14 @@ public class ExercObserver {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        CaixaEntradaGrupo c = new CaixaEntradaGrupo();
+        MembroEmail velho = new MembroEmail();
+        MembroWhatsapp bozo = new MembroWhatsapp();
+        c.addObserver(velho);
+        c.addObserver(bozo);
+        
+        c.setNovaMensagem("Comprei um chip novo!");
+
     }
     
 }

@@ -13,7 +13,8 @@ public class CaixaEntradaGrupo extends Observable {
     private String mensagem;
     
     public void setNovaMensagem(String msg){
-        
+        mensagem = msg;
+        notifyObserver();
     }
     
     public String getMensagem(){

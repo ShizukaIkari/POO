@@ -20,7 +20,7 @@ public class CadeiaCaixa {
         if(dinheiro>0){
             AbstractCaixa.realizaSaque(dinheiro);
         } else {
-            JOptionPane.showMessageDialog("Digite um valor válido! (Inteiro e maior que zero.)");
+            JOptionPane.showMessageDialog(null,"Digite um valor válido! (Inteiro e maior que zero.)");
         }
         
     }

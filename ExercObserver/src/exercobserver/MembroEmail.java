@@ -14,7 +14,9 @@ public class MembroEmail implements Observer {
 
     @Override
     public void update(Observable obs) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        CaixaEntradaGrupo caixa = (CaixaEntradaGrupo) obs;
+        System.out.println("Nova mensagem! "+ caixa.getMensagem());
+       
     }
 
     public String getEmail() {
